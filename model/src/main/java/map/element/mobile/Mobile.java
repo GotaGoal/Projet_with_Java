@@ -1,36 +1,50 @@
 package map.element.mobile;
 
+import java.awt.Point;
+
+import aedt.showboard.IPawn;
 import map.MapWorld;
 import map.element.Element;
 import map.element.Permeability;
 import map.element.Sprite;
 
-public abstract class Mobile extends Element {
+public abstract class Mobile extends Element implements IPawn{
 	private int	x;
 	private int	y;
+	private final Point position;
 
 	public Mobile(final Sprite sprite) {
 		super(sprite, Permeability.BLOCKING);
+		this.position = new Point();
 	}
 
+	@Override
 	public int getX() {
-		return this.x;
+		return this.position.x;
 	}
 
 	private void setX(final int x) {
 		if ((x >= 0) && (x < this.getMapWorld().getWidth())) {
-			this.x = x;
+			this.position.x = x;
+			this.getMapWorld().setMobileHasChanged();
 		}
 	}
 
+	@Override
 	public int getY() {
-		return this.y;
+		return this.position.y;
 	}
 
 	private void setY(final int y) {
 		if ((y >= 0) && (y < this.getMapWorld().getHeight())) {
-			this.y = y;
+			this.position.y = y;
+			this.getMapWorld().setMobileHasChanged();
 		}
+	}
+
+	@Override
+	public Point getPosition() {
+		return this.position;
 	}
 
 	private boolean isMovePossible(final int x, final int y) {

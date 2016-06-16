@@ -6,7 +6,7 @@ import map.element.Sprite;
 class Land extends MotionlessElement {
 
 	public Land() {
-		super(new Sprite("░░"), Permeability.PENETRABLE, ' ');
+		super(new Sprite("░░","land.png"), Permeability.PENETRABLE, ' ');
 	}
 
 }

@@ -1,8 +1,11 @@
 package map.element;
 
+import java.awt.Image;
+
+import aedt.showboard.ISquare;
 import map.MapWorld;
 
-public abstract class Element {
+public abstract class Element implements ISquare{
 	private Sprite				sprite;
 	private Permeability	permeability;
 	private MapWorld		mapWorld;
@@ -34,5 +37,9 @@ public abstract class Element {
 
 	public void setMapWorld(final MapWorld mapWorld) {
 		this.mapWorld = mapWorld;
+	}
+	@Override
+	public Image getImage() {
+		return this.getSprite().getImage();
 	}
 }

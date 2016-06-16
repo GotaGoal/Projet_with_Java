@@ -5,21 +5,47 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Observable;
 
 
 import map.element.Element;
+import map.element.mobile.Lorann;
 import map.element.mobile.Mobile;
 import map.element.motionless.MotionlessElements;
 
-public class MapWorld {
+public class MapWorld extends Observable {
+	
 	public Element		elements[][];
 	public final ArrayList<Mobile>	mobiles;
+	private Lorann lorann;
+	
 	private int	width;
 	private int	height;
 
-	public MapWorld(final String fileName) throws IOException {
+	public MapWorld() throws IOException {
 		
 		this.mobiles = new ArrayList<Mobile>();
+		
+		
+	}
+	public MapWorld(final int width, final int height) throws IOException {
+		this();
+		this.width = width;
+		this.height = height;
+		this.elements = new Element[this.getWidth()][this.getHeight()];
+
+		for (int y = 0; y < this.getHeight(); y++) {
+			for (int x = 0; x < this.getWidth(); x++) {
+				if ((y == 0) || (y == (height - 1)) || (x == 0) || (x == (width - 1))) {
+					this.addElement(MotionlessElements.BONE, x, y);
+				} else {
+					this.addElement(MotionlessElements.LAND, x, y);
+				}
+			}
+		}
+	}
+	public MapWorld(final String fileName) throws IOException {
+		this();
 		this.loadFile(fileName);
 	}
 
@@ -30,13 +56,25 @@ public class MapWorld {
 	public int getHeight() {
 		return this.height;
 	}
-
+	public Lorann getLorann()
+	{
+		return this.lorann;
+	}
+	
+	public Element getElement(final int x, final int y) {
+		if ((x < 0) || (y < 0) || (x >= this.getWidth()) || (y >= this.getHeight())) {
+			return null;
+		}
+		return this.elements[x][y];
+	}
+	
 	public Element getElements(final int x, final int y) {
 		if ((x < 0) || (y < 0) || (x >= this.getWidth()) || (y >= this.getHeight())) {
 			return null;
 		}
 		return this.elements[x][y];
 	}
+	
 
 	public void addElement(final Element element, final int x, final int y) {
 		this.elements[x][y] = element;
@@ -47,6 +85,13 @@ public class MapWorld {
 	public void addMobile(final Mobile mobile, final int x, final int y) {
 		this.mobiles.add(mobile);
 		mobile.setMapWorld(this, x, y);
+		this.setChanged();
+		this.notifyObservers();
+	}
+	
+	public void addMobile(final Lorann lorann, final int x, final int y) {
+		this.setLorann(lorann);
+		this.addMobile((Mobile) lorann, x, y);
 	}
 
 	private void loadFile(final String fileName) throws IOException {
@@ -69,5 +114,31 @@ public class MapWorld {
 			//System.out.print(line);
 		}
 		buffer.close();
+	}
+	
+	public ArrayList<Mobile> getMobiles() {
+		return this.mobiles;
+	}
+	public void setLorann(final Lorann lorann) {
+		this.lorann = lorann;
+		this.setChanged();
+	}
+
+	public void setMobileHasChanged() {
+		this.setChanged();
+		this.notifyObservers();
+	}
+
+	@Override
+	public void notifyObservers() {
+		super.notifyObservers();
+	}
+
+	public Element[][] getElements() {
+		return this.elements;
+	}
+
+	public void setElements(final Element[][] elements) {
+		this.elements = elements;
 	}
 }

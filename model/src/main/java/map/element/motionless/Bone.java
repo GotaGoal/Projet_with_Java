@@ -8,7 +8,7 @@ public class Bone extends MotionlessElement {
 	
 
 	public Bone() {
-		super(new Sprite("┌┐"), Permeability.BLOCKING, 'B');
+		super(new Sprite("┌┐","bone.png"), Permeability.BLOCKING, 'B');
 	}
 
 }
