@@ -1,0 +1,32 @@
+30
+30
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+S  MFWWM                 F M S
+S FFFFWW    C           FF F S
+S F  TFWW    F  F   F    C F S
+S   F F WW        F  C  FFF  S
+S FFF F F C       FF      F SS
+S F     F WW         FF F    S
+S          WW           FFSS S
+S     F    WW F WWW       C  S
+S  C     FFWWCFWWWWWW    F   S
+S         FWWWWWWM  WW   F SMS
+S FF F   FWWMWWWW T  C      SS
+S F   F  WWF  WWW  WWW    C  S
+S    FC FWWFFCFWWW WWWW WWW  S
+SS       WWF   FWWC  WWWWW  FS
+SMSS     WW    CW     C    SSS
+S  S     T             FSF  SS
+S S    WW    FF  T      FS  MS
+SCS   WW     F     F  CFSSS SS
+S  S  WW       FF      FFS   S
+S     WW C     F    CS  S  S S
+S     WW    F    S SSSS S SS S
+S    WW  F          SC  S    S
+S   CWW      F      SS SS  S S
+S   WW  F   FFF C      S  SS S
+S F WW  F  FF      SCS   SS  S
+SCS WW    FFF     SSSS  SS TSS
+SS  WW F FF      SSMS  SS    S
+SM WWT F  C F   SC     C  SSMS
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS

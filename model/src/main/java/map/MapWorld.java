@@ -55,14 +55,18 @@ public class MapWorld {
 		int numLine = 0;
 		line = buffer.readLine();
 		this.width = Integer.parseInt(line);
+		//this.width=20;
 		line = buffer.readLine();
 		this.height = Integer.parseInt(line);
+		//this.height = 11;
 		this.elements = new Element[this.getWidth()][this.getHeight()];
 		while ((line = buffer.readLine()) != null) {
 			for (int x = 0; x < line.toCharArray().length; x++) {
 				this.addElement(MotionlessElements.getFromFileSymbol(line.toCharArray()[x]), x, numLine);
+				//System.out.print(line.toCharArray()[x]);
 			}
 			numLine++;
+			//System.out.print(line);
 		}
 		buffer.close();
 	}
