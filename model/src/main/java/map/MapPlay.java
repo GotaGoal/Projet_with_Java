@@ -1,10 +1,8 @@
 package map;
 import java.io.IOException;
 
-import java.awt.event.KeyEvent;
 
-
-public class MapPlay{
+public class MapPlay implements IOrderPerformed{
 	
 
 		private final MapWorld mapWorld;
@@ -13,19 +11,19 @@ public class MapPlay{
 			this.mapWorld = mapWorld;
 		}
 		
-		public void play(final int keyCode) throws IOException {
+		public void orderPerform(final UserOrder userOrder) throws IOException {
 			for (;;) {
-				switch (keyCode) {
-					case KeyEvent.VK_UP:
+				switch (userOrder) {
+					case UP:
 						this.mapWorld.getLorann().moveUp();
 						break;
-					case KeyEvent.VK_RIGHT:
+					case RIGHT:
 						this.mapWorld.getLorann().moveRight();
 						break;
-					case KeyEvent.VK_DOWN:
+					case DOWN:
 						this.mapWorld.getLorann().moveDown();
 						break;
-					case KeyEvent.VK_LEFT:
+					case LEFT:
 						this.mapWorld.getLorann().moveLeft();
 						break;
 					default:
@@ -33,7 +31,6 @@ public class MapPlay{
 				}
 			}
 		}
-
 	}
 
 
