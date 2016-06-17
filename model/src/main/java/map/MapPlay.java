@@ -1,16 +1,24 @@
 package map;
 import java.io.IOException;
 
+
+
 import java.awt.event.KeyEvent;
 
 
-public class MapPlay{
+public class MapPlay implements IOrderPerformed{
+	private final MapFrame mapFrame;
 	
 
 		private final MapWorld mapWorld;
 
 		public MapPlay(final MapWorld mapWorld) {
 			this.mapWorld = mapWorld;
+			this.mapWorld.addMobile(new Lorann(), 2, 2);
+		}
+		
+		public void setMapFrame(final MapFrame mapFrame) {
+			this.mapFrame = mapFrame;
 		}
 		
 		public void play(final int keyCode) throws IOException {
