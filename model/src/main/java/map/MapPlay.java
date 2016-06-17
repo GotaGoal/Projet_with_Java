@@ -1,7 +1,10 @@
 package map;
 import java.io.IOException;
 
-public class MapPlay {
+import java.awt.event.KeyEvent;
+
+
+public class MapPlay{
 	
 
 		private final MapWorld mapWorld;
@@ -9,22 +12,20 @@ public class MapPlay {
 		public MapPlay(final MapWorld mapWorld) {
 			this.mapWorld = mapWorld;
 		}
-
-		public void play() throws IOException {
+		
+		public void play(final int keyCode) throws IOException {
 			for (;;) {
-				final int key = System.in.read();
-
-				switch (key) {
-					case 53:
+				switch (keyCode) {
+					case KeyEvent.VK_UP:
 						this.mapWorld.getLorann().moveUp();
 						break;
-					case 51:
+					case KeyEvent.VK_RIGHT:
 						this.mapWorld.getLorann().moveRight();
 						break;
-					case 50:
+					case KeyEvent.VK_DOWN:
 						this.mapWorld.getLorann().moveDown();
 						break;
-					case 49:
+					case KeyEvent.VK_LEFT:
 						this.mapWorld.getLorann().moveLeft();
 						break;
 					default:
