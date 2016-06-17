@@ -1,14 +1,14 @@
 package map;
 import java.io.IOException;
 
-
+import map.element.mobile.Lorann;
 
 import java.awt.event.KeyEvent;
 
 
 public class MapPlay implements IOrderPerformed{
 	private final MapFrame mapFrame;
-	
+
 
 		private final MapWorld mapWorld;
 
@@ -21,19 +21,19 @@ public class MapPlay implements IOrderPerformed{
 			this.mapFrame = mapFrame;
 		}
 		
-		public void play(final int keyCode) throws IOException {
+		public void orderPerform(final UserOrder userOrder) throws IOException {
 			for (;;) {
-				switch (keyCode) {
-					case KeyEvent.VK_UP:
+				switch (userOrder) {
+					case UP:
 						this.mapWorld.getLorann().moveUp();
 						break;
-					case KeyEvent.VK_RIGHT:
+					case RIGHT:
 						this.mapWorld.getLorann().moveRight();
 						break;
-					case KeyEvent.VK_DOWN:
+					case DOWN:
 						this.mapWorld.getLorann().moveDown();
 						break;
-					case KeyEvent.VK_LEFT:
+					case LEFT:
 						this.mapWorld.getLorann().moveLeft();
 						break;
 					default:
@@ -41,7 +41,6 @@ public class MapPlay implements IOrderPerformed{
 				}
 			}
 		}
-
 	}
 
 
