@@ -1,8 +1,10 @@
 package map;
 
+import java.awt.Color;
 import java.io.IOException;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import map.element.Element;
@@ -31,7 +33,7 @@ public class Map extends JFrame implements Runnable{
 		
 		this.mapPlay = new MapPlay(this.mapWorld);
 		
-		this.mapWorld.addMobile(Lorann, 2, 2);
+		//this.mapWorld.addMobile(Lorann, 2, 2);
 		SwingUtilities.invokeLater(this);
 		this.mapPlay.play();
 		
@@ -97,13 +99,10 @@ public class Map extends JFrame implements Runnable{
 	*/
 	@Override
 	public void run() {
-		JFrame fenetre = new JFrame();
-		fenetre.setTitle("Lorann Yolo");
-		fenetre.setSize(400, 100);
-		fenetre.setVisible(true);
+		//new Fenetre();
 		
-		final BoardFrame boardFrame = new BoardFrame("Lorann Yolo", this.getMapWorld().getWidth(), this.getMapWorld().getWidth(), 7,
-				this.getMapWorld().getElements(), this.getMapWorld().getMobiles(), this.getMapWorld().getLorann().getPosition());
+		final BoardFrame boardFrame = new BoardFrame("Lorann Yolo",
+				WINDOW_HEIGHT, WINDOW_HEIGHT, WINDOW_HEIGHT, this.getMapWorld().getElements(), this.getMapWorld().getMobiles(), this.getMapWorld().getLorann().getPosition());
 		this.mapWorld.addObserver(boardFrame.getBoardPanel());
 	}
 	public void play() throws IOException {
