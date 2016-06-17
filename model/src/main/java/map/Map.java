@@ -102,7 +102,7 @@ public class Map extends JFrame implements Runnable{
 		//new Fenetre();
 		
 		final BoardFrame boardFrame = new BoardFrame("Lorann Yolo",
-				WINDOW_HEIGHT, WINDOW_HEIGHT, WINDOW_HEIGHT, this.getMapWorld().getElements(), this.getMapWorld().getMobiles(), this.getMapWorld().getLorann().getPosition());
+				WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_HEIGHT, this.getMapWorld().getElements(), this.getMapWorld().getMobiles(), this.getMapWorld().getLorann().getPosition());
 		this.mapWorld.addObserver(boardFrame.getBoardPanel());
 	}
 	public void play() throws IOException {
