@@ -35,7 +35,7 @@ public class Map extends JFrame implements Runnable{
 		
 		//this.mapWorld.addMobile(Lorann, 2, 2);
 		SwingUtilities.invokeLater(this);
-		this.mapPlay.play();
+		this.mapPlay.play(0);
 		
 		
 	}
@@ -106,7 +106,7 @@ public class Map extends JFrame implements Runnable{
 		this.mapWorld.addObserver(boardFrame.getBoardPanel());
 	}
 	public void play() throws IOException {
-		this.getMapPlay().play();
+		this.getMapPlay().play(0);
 	}
 
 	public MapWorld getMapWorld() {
