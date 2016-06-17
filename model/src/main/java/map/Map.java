@@ -11,7 +11,7 @@ import map.element.Element;
 import map.element.mobile.Lorann;
 import map.element.mobile.Mobile;
 import aedt.showboard.BoardFrame;
-public class Map extends JFrame implements Runnable{
+public class Map implements Runnable{
 	
 	/**
 	 * 
@@ -25,8 +25,9 @@ public class Map extends JFrame implements Runnable{
 	private  MapFrame mapFrame;
 
 	public Map() throws IOException {
-		this.mapWorld = new MapWorld("map3.txt");
+		this.mapWorld = new MapWorld("mapWorld.txt");
 		this.mapPlay = new MapPlay(this.mapWorld);
+		
 		/*
 		this.WINDOW_WIDTH = mapWorld.getWidth();
 		this.WINDOW_HEIGHT = mapWorld.getHeight();
@@ -53,9 +54,10 @@ public class Map extends JFrame implements Runnable{
 		this.mapPlay.setMapFrame(this.mapFrame);
 		
 	}
+	/*
 	public void play() throws IOException {
-		this.getMapPlay().play(0);
-	}
+		this.getMapPlay().play();
+	}*/
 
 	public MapWorld getMapWorld() {
 		return this.mapWorld;

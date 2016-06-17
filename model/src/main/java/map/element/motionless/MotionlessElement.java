@@ -4,7 +4,7 @@ import map.element.Element;
 import map.element.Permeability;
 import map.element.Sprite;
 
-abstract class MotionlessElement extends Element {
+public abstract class MotionlessElement extends Element {
 
 	private char fileSymbol;
 	public MotionlessElement(final Sprite sprite, final Permeability permeability, final char fileSymbol) {

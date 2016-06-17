@@ -22,8 +22,13 @@ public class Sprite extends StringWriter {
 	public Sprite(final String c) {
 		this(c, "noimage.jpg");
 	}
+	
+	
 
 	public Image getImage() {
 		return this.image;
 	}
+	
 }
+
+

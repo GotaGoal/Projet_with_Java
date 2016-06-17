@@ -19,7 +19,7 @@ public abstract class Element implements ISquare{
 		return this.sprite;
 	}
 
-	private void setSprite(final Sprite sprite) {
+	public void setSprite(final Sprite sprite) {
 		this.sprite = sprite;
 	}
 
@@ -42,4 +42,7 @@ public abstract class Element implements ISquare{
 	public Image getImage() {
 		return this.getSprite().getImage();
 	}
+	
+	 
+	
 }

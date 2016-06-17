@@ -9,13 +9,16 @@ import java.util.Observable;
 
 
 import map.element.Element;
+
 import map.element.mobile.Lorann;
 import map.element.mobile.Mobile;
 import map.element.motionless.MotionlessElements;
+import map.element.motionless.MotionlessElement;
 
 public class MapWorld extends Observable {
 	
-	public Element		elements[][];
+	
+	public MotionlessElement		elements[][];
 	public final ArrayList<Mobile>	mobiles;
 	private Lorann lorann;
 	
@@ -28,26 +31,11 @@ public class MapWorld extends Observable {
 		
 		
 	}
-	public MapWorld(final int width, final int height) throws IOException {
-		this();
-		this.width = width;
-		this.height = height;
-		this.elements = new Element[this.getWidth()][this.getHeight()];
-
-		for (int y = 0; y < this.getHeight(); y++) {
-			for (int x = 0; x < this.getWidth(); x++) {
-				if ((y == 0) || (y == (height - 1)) || (x == 0) || (x == (width - 1))) {
-					this.addElement(MotionlessElements.BONE, x, y);
-				} else {
-					this.addElement(MotionlessElements.LAND, x, y);
-				}
-			}
-		}
-	}
 	public MapWorld(final String fileName) throws IOException {
 		this();
 		this.loadFile(fileName);
 	}
+	
 
 	public int getWidth() {
 		return this.width;
@@ -68,7 +56,7 @@ public class MapWorld extends Observable {
 		return this.elements[x][y];
 	}
 	
-	public Element getElements(final int x, final int y) {
+	public MotionlessElement getElements(final int x, final int y) {
 		if ((x < 0) || (y < 0) || (x >= this.getWidth()) || (y >= this.getHeight())) {
 			return null;
 		}
@@ -76,7 +64,7 @@ public class MapWorld extends Observable {
 	}
 	
 
-	public void addElement(final Element element, final int x, final int y) {
+	public void addElement(final MotionlessElement element, final int x, final int y) {
 		this.elements[x][y] = element;
 		if (element != null) {
 			element.setMapWorld(this);
@@ -94,6 +82,12 @@ public class MapWorld extends Observable {
 		this.addMobile((Mobile) lorann, x, y);
 	}
 
+	//Maxime Bigot doit passer un coup de fil pour modifier cette fonction
+	
+	////
+	///
+	////
+	//
 	private void loadFile(final String fileName) throws IOException {
 		final BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
 		String line;
@@ -104,7 +98,7 @@ public class MapWorld extends Observable {
 		line = buffer.readLine();
 		this.height = Integer.parseInt(line);
 		//this.height = 11;
-		this.elements = new Element[this.getWidth()][this.getHeight()];
+		this.elements = new MotionlessElement[this.getWidth()][this.getHeight()];
 		while ((line = buffer.readLine()) != null) {
 			for (int x = 0; x < line.toCharArray().length; x++) {
 				this.addElement(MotionlessElements.getFromFileSymbol(line.toCharArray()[x]), x, numLine);
@@ -137,8 +131,11 @@ public class MapWorld extends Observable {
 	public Element[][] getElements() {
 		return this.elements;
 	}
-
+	
+	
+	
+/*
 	public void setElements(final Element[][] elements) {
 		this.elements = elements;
-	}
+	}*/
 }
