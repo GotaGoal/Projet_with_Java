@@ -22,10 +22,10 @@ public class Map extends JFrame implements Runnable{
 	private  int				WINDOW_WIDTH;
 	private  int				WINDOW_HEIGHT;
 	private MapPlay mapPlay;
-	private int ZOOM = 6;
+	
 
 	public Map() throws IOException {
-		this.mapWorld = new MapWorld("mapWorld.txt");
+		this.mapWorld = new MapWorld("map3.txt");
 		this.WINDOW_WIDTH = mapWorld.getWidth();
 		this.WINDOW_HEIGHT = mapWorld.getHeight();
 		this.Lorann = new Lorann();

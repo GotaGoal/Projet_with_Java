@@ -1,0 +1,13 @@
+20
+11
+BBBBBBBBBBBVBBBBBVBH
+BBVVB BVVBB H  H   H
+    H H  HB H  H   H
+ VV H H  HB H  B   H
+   BH H  HB HBVV   H
+O V BVB  HB  H E V H
+         HB    B B
+ VVBH    HB  H   HB 
+    HBV BHB  BVVBH
+    HB   HB VV   H B
+VVVVBVVV    BB   B B
