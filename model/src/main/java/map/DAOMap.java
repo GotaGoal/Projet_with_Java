@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import map.element.motionless.MotionlessElement;
+import map.element.motionless.MotionlessElements;
+
 /**
  * The Class DAOHelloWorld.
  *
@@ -91,7 +94,20 @@ class DAOMap extends DAOEntity<Map> {
 		String line;
 		int numLine = 0;
 		line = buffer.readLine();
+		int valeur_x = Integer.parseInt(line);
 		line = buffer.readLine();
+		int valeur_y = Integer.parseInt(line);
+		final String SQL = "{call taille_map(?, ?, ?, ?)}";
+		try {
+		final CallableStatement CALL = this.getConnection().prepareCall(SQL);
+		CALL.setInt(1, valeur_x);
+		CALL.setInt(2, valeur_y);
+		CALL.setInt(3, mapID);
+		CALL.execute();
+		} catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		
 		while ((line = buffer.readLine()) != null) {
 			for (int x = 0; x < line.toCharArray().length; x++) {
 				final String sql = "{call ajouter_element(?, ?, ?, ?)}";
@@ -128,6 +144,33 @@ class DAOMap extends DAOEntity<Map> {
 		buffer.close();
 		
 		
+	}
+	
+	private void loadMap(final int mapID, final MotionlessElement elements[][]) throws IOException {
+		final String sql_x = "{call get_taille_map_x(?)}";
+		final String sql_y = "{call get_taille_map_y(?)}";
+		try {
+			final CallableStatement call_x = this.getConnection().prepareCall(sql_x);
+			final CallableStatement call_y = this.getConnection().prepareCall(sql_y);
+			call_x.setInt(1, mapID);
+			call_y.setInt(1, mapID);
+			call_x.execute();
+			call_y.execute();
+			int valeur_x;
+			int valeur_y;
+			elements = new MotionlessElement[valeur_x][valeur_y];
+			while ((line = buffer.readLine()) != null) {
+				for (;;) {
+					this.addElement(MotionlessElements.getFromFileSymbol(line.toCharArray()[x]), x, numLine);
+					//System.out.print(line.toCharArray()[x]);
+				}
+			} 
+
+		} 
+		catch (final SQLException e) {
+			e.printStackTrace();
+		}
+				
 	}
 
 	@Override

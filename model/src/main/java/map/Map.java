@@ -2,6 +2,7 @@ package map;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -65,6 +66,15 @@ public class Map extends Entity implements Runnable{
 
 	public MapPlay getMapPlay() {
 		return this.mapPlay;
+	}
+	
+	public void loadMessage(final String fileName, final int id) throws IOException {
+		try {
+			final DAOMap daomap = new DAOMap(DBConnection.getInstance().getConnection());
+			daomap.loadBDD(fileName, id);
+		} catch (final SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

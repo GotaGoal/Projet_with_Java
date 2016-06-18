@@ -1,13 +1,13 @@
 20
 11
-BVVVVVVVVVVVVVVVVVVB
-HBBBBBBBBBBBBBBBBBBB
-H   B    B         H
-H   H    H      HBBH
-H   B    B      H  H
-H  BHHHHHHB   BHB  H
-H         HB    H HH
-H  BHHHHB H     H  H
-H  H    H HB  HHB BH
-H HB    H H        H
-BHBBVVVVBVBVVVVVVVVB
+BHHHHHHHHHHHHHHHHHHB
+VBBBBBBBBBBBBBBBBBBB
+V   B    B         V
+V   V    V      BHBV
+V   B    B      V  V
+V  BHHHHHHB   BHB  V
+V         VB    V HV
+V  BHHHHB V     V  V
+V  V    V VB  HHB BV
+V BB    V V        V
+BHBBHHHHBHBHHHHHHHHB
