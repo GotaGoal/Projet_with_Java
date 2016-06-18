@@ -9,8 +9,7 @@ import map.element.Permeability;
 import map.element.Sprite;
 
 public abstract class Mobile extends Element implements IPawn{
-	private int	x;
-	private int	y;
+
 	private final Point position;
 
 	public Mobile(final Sprite sprite) {

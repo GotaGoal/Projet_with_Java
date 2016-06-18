@@ -9,7 +9,7 @@ import java.util.Observable;
 
 
 import map.element.Element;
-
+import map.element.interactions.Interactions;
 import map.element.mobile.Lorann;
 import map.element.mobile.Mobile;
 import map.element.motionless.MotionlessElements;
@@ -20,6 +20,7 @@ public class MapWorld extends Observable {
 	
 	public MotionlessElement		elements[][];
 	public final ArrayList<Mobile>	mobiles;
+	public final ArrayList<Interactions> interactions;
 	private Lorann lorann;
 	
 	private int	width;
@@ -28,6 +29,7 @@ public class MapWorld extends Observable {
 	public MapWorld() throws IOException {
 		
 		this.mobiles = new ArrayList<Mobile>();
+		this.interactions = new ArrayList<Interactions>();
 		
 		
 	}
@@ -76,7 +78,13 @@ public class MapWorld extends Observable {
 		this.setChanged();
 		this.notifyObservers();
 	}
-	
+	/*
+	public void addMobile(final Interactions interaction, final int x, final int y) {
+		this.mobiles.add(interaction);
+		interaction.setMapWorld(this, x, y);
+		this.setChanged();
+		this.notifyObservers();
+	}*/
 	public void addMobile(final Lorann lorann, final int x, final int y) {
 		this.setLorann(lorann);
 		this.addMobile((Mobile) lorann, x, y);
@@ -105,8 +113,11 @@ public class MapWorld extends Observable {
 	}
 	
 	public ArrayList<Mobile> getMobiles() {
+		
 		return this.mobiles;
+		
 	}
+	
 	public void setLorann(final Lorann lorann) {
 		this.lorann = lorann;
 		this.setChanged();

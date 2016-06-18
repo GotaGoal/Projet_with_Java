@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import map.element.Sprite;
 import map.element.mobile.Lorann;
+import map.element.motionless.Energy;
 import map.element.motionless.IDoActionOnHeroes;
 
 
@@ -15,11 +16,14 @@ public class MapPlay implements IOrderPerformed{
 	
 
 		private MapWorld mapWorld;
-	
+		private Energy energy;
 
 		public MapPlay(final MapWorld mapWorld) {
 			this.mapWorld = mapWorld;
+			this.energy = new Energy();
+			
 			this.mapWorld.addMobile(new Lorann(), 2, 2);
+			this.mapWorld.addElement(this.energy, 10, 2);
 			
 		
 		}
@@ -80,6 +84,10 @@ public class MapPlay implements IOrderPerformed{
 					MapView.displayMessage("You enter in a New Level.");
 					this.resolveUp();
 					break;
+				case PICKUP:
+					MapView.displayMessage("You have found the boboll");
+					this.resolvePickUp();
+					break;
 				/*case ENTER_TOWN:
 					NettleView.displayMessage("You enter a town.");
 					this.resolveEnterTown();
@@ -109,6 +117,12 @@ public class MapPlay implements IOrderPerformed{
 			
 			
 			this.resolveWorldAnswer();
+		}
+		private void resolvePickUp() throws IOException {
+			
+			//this.mapWorld.removeObject(this.energy);
+			
+			
 		}
 /*
 		private void resolveEnterTown() throws IOException {
