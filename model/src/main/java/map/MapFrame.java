@@ -13,7 +13,7 @@ public class MapFrame extends JFrame implements KeyListener {
 	private static final long				serialVersionUID	= 1500600853286674118L;
 	
 	private  MapPanel	mapPanel;
-	//private NettleBoardPanel				meetingPanel;
+	
 	private IOrderPerformed		mapPlay;
 	private MapCardView		mapCardView;
 	private int ZOOM = 13;
@@ -42,17 +42,20 @@ public class MapFrame extends JFrame implements KeyListener {
 		this.setVisible(true);
 	}
 	
-	public void setMeeting(final MapWorld mapWorld) {
-		/*if (this.mapPanel != null) {
+	public void setMeeting(final MapWorld mapWorld,IOrderPerformed mapPlay) {
+		
+		this.getContentPane().removeAll();
+		if (this.mapPanel != null) {
 			
 			this.mapCardView.removeLayoutComponent(this.mapPanel);
-		}*/
+		}
+		this.mapPlay = mapPlay;
 		this.setTitle("nique bien ta mère");
 		
 		this.mapPanel = new MapPanel(new Dimension(mapWorld.getWidth(), mapWorld.getHeight()), mapWorld.getElements(),
 				mapWorld.getMobiles(), this.position.getLocation(),ZOOM);
 		mapWorld.addObserver(this.mapPanel);
-		this.addKeyListener(this);
+		//this.addKeyListener(this);
 		
 		this.getContentPane().add(this.mapPanel, "MAP");
 		

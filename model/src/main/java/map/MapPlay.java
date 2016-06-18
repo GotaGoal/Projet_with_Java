@@ -2,18 +2,20 @@ package map;
 import java.io.IOException;
 
 
+
 import map.element.Sprite;
 import map.element.mobile.Lorann;
 import map.element.motionless.IDoActionOnHeroes;
 
-import java.awt.event.KeyEvent;
 
 
 public class MapPlay implements IOrderPerformed{
 	private  MapFrame mapFrame;
+
 	
 
 		private MapWorld mapWorld;
+	
 
 		public MapPlay(final MapWorld mapWorld) {
 			this.mapWorld = mapWorld;
@@ -102,7 +104,9 @@ public class MapPlay implements IOrderPerformed{
 		}
 		
 		private void resolveUp() throws IOException {
+			
 			this.setMapWorld(new MapWorld("test.txt"));
+			
 			
 			this.resolveWorldAnswer();
 		}
@@ -118,8 +122,8 @@ public class MapPlay implements IOrderPerformed{
 		}
 */
 		private void resolveWorldAnswer() throws IOException {
-			this.getMapWorld().addMobile(new Lorann(), 15, 15);
-			this.getMapFrame().setMeeting(this.getMapWorld());
+			this.getMapWorld().addMobile(new Lorann(), 3, 3);
+			this.getMapFrame().setMeeting(this.getMapWorld(),this);
 			System.out.println("je suis la ");
 			this.getMapFrame();
 			
