@@ -49,11 +49,13 @@ public class MapFrame extends JFrame implements KeyListener {
 	private void setX(final int x)
 	{
 		this.position.x = x;
+	
 	}
 	
 
 	public void refresh(final Point center) {
 		this.mapPanel.setCenter(center);
+		
 	}
 
 	
@@ -62,6 +64,7 @@ public class MapFrame extends JFrame implements KeyListener {
 	public void keyPressed(final KeyEvent keyEvent) {
 		try {
 			this.getMapPlay().orderPerform(MapView.keyCodeToUserOrder(keyEvent.getKeyCode()));
+			this.setBackground(Color.black);
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}

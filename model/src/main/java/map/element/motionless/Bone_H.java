@@ -9,4 +9,10 @@ public class Bone_H extends MotionlessElement {
 		super(new Sprite("hh", "boneh.png"), Permeability.BLOCKING, 'H');
 	}
 
+	@Override
+	public ActionOnHeroes getActionOnHeroes() {
+		// TODO Auto-generated method stub
+		return ActionOnHeroes.NOP;
+	}
+
 }

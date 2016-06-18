@@ -1,6 +1,7 @@
 package map;
 import java.io.IOException;
 
+
 import map.element.Sprite;
 import map.element.mobile.Lorann;
 
@@ -29,28 +30,33 @@ public class MapPlay implements IOrderPerformed{
 		public void setMapFrame(final MapFrame mapFrame) {
 			this.mapFrame = mapFrame;
 		}
+		public MapWorld getActuelMapWorld() {
+			
+			return this.getMapWorld();
+		}
 		
 		public void orderPerform(final UserOrder userOrder) throws IOException {
 			
 				switch (userOrder) {
 					case UP:
-						this.mapWorld.getLorann().moveUp();
-						//this.mapWorld.getLorann().setImage("land.png");
-						//this.mapWorld.getLorann().setSprite(new Sprite("☺!","bone.png"));
+						this.getActuelMapWorld().getLorann().moveUp();
+						this.mapWorld.getLorann().setSprite(new Sprite("☺!","lorann_u.png"));
 						
-						System.out.println("maxime est un fils de pute");
 						break;
 					case RIGHT:
-						this.mapWorld.getLorann().moveRight();
-						System.out.println("gros poupouch est moche");
+						this.getActuelMapWorld().getLorann().moveRight();
+						this.mapWorld.getLorann().setSprite(new Sprite("☺!","lorann_r.png"));
+						
 						break;
 					case DOWN:
-						this.mapWorld.getLorann().moveDown();
-						System.out.println("docteur coq a une jonquille");
+						this.getActuelMapWorld().getLorann().moveDown();
+						this.mapWorld.getLorann().setSprite(new Sprite("☺!","lorann_b.png"));
+						
 						break;
 					case LEFT:
-						this.mapWorld.getLorann().moveLeft();
-						System.out.println("goal marque un but");
+						this.getActuelMapWorld().getLorann().moveLeft();
+						this.mapWorld.getLorann().setSprite(new Sprite("☺!","lorann_bl.png"));
+						
 						break;
 					case NOP:
 						
