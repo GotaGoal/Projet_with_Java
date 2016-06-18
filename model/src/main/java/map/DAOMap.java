@@ -18,6 +18,7 @@ import map.element.motionless.MotionlessElements;
  * @author Jean-Aymeric Diet
  */
 class DAOMap extends DAOEntity<Map> {
+	private MapWorld mapWorld;
 
 	/**
 	 * Instantiates a new DAO hello world.
@@ -156,7 +157,7 @@ class DAOMap extends DAOEntity<Map> {
 			call.setInt(1, mapID);
 			call.execute();
 			final ResultSet resultSet = call.getResultSet();
-			elements = new MotionlessElement[resultSet.getInt(x)][resultSet.getInt(y)];
+			mapWorld.elements = new MotionlessElement[resultSet.getInt(x)][resultSet.getInt(y)];
 			for (int valeur_x = 0; valeur_x < resultSet.getInt(x); valeur_x++) {
 				for (int valeur_y = 0; valeur_y < resultSet.getInt(y); valeur_y++) {
 					final String SQL = "{call get_element(?, ?, ?)}";
@@ -169,7 +170,7 @@ class DAOMap extends DAOEntity<Map> {
 					
 					switch(result.getInt(id_element)){
 						case 1 :
-							elements.addElement()
+							mapWorld.addElement(MotionlessElements./getFromFileSymbol==>getFromNomBDD, x, y);
 					}
 				}
 			} 
