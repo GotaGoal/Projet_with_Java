@@ -10,7 +10,7 @@ import java.sql.SQLException;
  *
  * @author Jean-Aymeric Diet
  */
-class DAOHelloWorld extends DAOEntity<Map> {
+class DAOMap extends DAOEntity<Map> {
 
 	/**
 	 * Instantiates a new DAO hello world.
@@ -20,7 +20,7 @@ class DAOHelloWorld extends DAOEntity<Map> {
 	 * @throws SQLException
 	 *           the SQL exception
 	 */
-	public DAOHelloWorld(final Connection connection) throws SQLException {
+	public DAOMap(final Connection connection) throws SQLException {
 		super(connection);
 	}
 
@@ -82,29 +82,5 @@ class DAOHelloWorld extends DAOEntity<Map> {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see model.DAOEntity#find(java.lang.String)
-	 */
-	@Override
-	public Map find(final String key) {
-		Map MapWorld = new Map();
-
-		try {
-			final String sql = "{call helloworldByKey(?)}";
-			final CallableStatement call = this.getConnection().prepareCall(sql);
-			call.setString(1, key);
-			call.execute();
-			final ResultSet resultSet = call.getResultSet();
-			if (resultSet.first()) {
-				MapWorld = new Map(resultSet.getInt("id"), key, resultSet.getString("message"));
-			}
-			return MapWorld;
-		} catch (final SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
+	
 }

@@ -23,11 +23,6 @@ CREATE TABLE `composition` (
   `num_map` int(11) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 --
--- Contenu de la table `composition`
---
-INSERT INTO `composition` (`id_composition`, `x`, `y`, `id_element`, `num_map`) VALUES
-(1, 0, 0, 1, 1),
-(2, 1, 1, 1, 1);
 -- --------------------------------------------------------
 --
 -- Structure de la table `element`
@@ -40,8 +35,10 @@ CREATE TABLE `element` (
 -- Contenu de la table `element`
 --
 INSERT INTO `element` (`id_element`, `name_element`) VALUES
-(1, 'bone'),
-(2, 'stone');
+(1, 'bone_v'),
+(2, 'bone_h'),
+(3, 'land'),
+(4, 'stone');
 -- --------------------------------------------------------
 --
 -- Structure de la table `map`
@@ -50,10 +47,6 @@ CREATE TABLE `map` (
   `num_map` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 --
--- Contenu de la table `map`
---
-INSERT INTO `map` (`num_map`) VALUES
-(1);
 --
 -- Index pour les tables exportées
 --
