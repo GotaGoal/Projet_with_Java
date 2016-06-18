@@ -146,23 +146,31 @@ class DAOMap extends DAOEntity<Map> {
 		
 	}
 	
-	private void loadMap(final int mapID, final MotionlessElement elements[][]) throws IOException {
-		final String sql_x = "{call get_taille_map_x(?)}";
-		final String sql_y = "{call get_taille_map_y(?)}";
+	public void loadMap(final int mapID, MotionlessElement elements[][]) throws IOException {
+		final String sql = "{call get_taille_map(?)}";
+		final String x = "x";
+		final String y = "y";
+		final String id_element = "id_element";
 		try {
-			final CallableStatement call_x = this.getConnection().prepareCall(sql_x);
-			final CallableStatement call_y = this.getConnection().prepareCall(sql_y);
-			call_x.setInt(1, mapID);
-			call_y.setInt(1, mapID);
-			call_x.execute();
-			call_y.execute();
-			int valeur_x;
-			int valeur_y;
-			elements = new MotionlessElement[valeur_x][valeur_y];
-			while ((line = buffer.readLine()) != null) {
-				for (;;) {
-					this.addElement(MotionlessElements.getFromFileSymbol(line.toCharArray()[x]), x, numLine);
-					//System.out.print(line.toCharArray()[x]);
+			final CallableStatement call = this.getConnection().prepareCall(sql);
+			call.setInt(1, mapID);
+			call.execute();
+			final ResultSet resultSet = call.getResultSet();
+			elements = new MotionlessElement[resultSet.getInt(x)][resultSet.getInt(y)];
+			for (int valeur_x = 0; valeur_x < resultSet.getInt(x); valeur_x++) {
+				for (int valeur_y = 0; valeur_y < resultSet.getInt(y); valeur_y++) {
+					final String SQL = "{call get_element(?, ?, ?)}";
+					final CallableStatement CALL = this.getConnection().prepareCall(SQL);
+					CALL.setInt(1, valeur_x);
+					CALL.setInt(2, valeur_y);
+					CALL.setInt(3, mapID);
+					CALL.execute();
+					final ResultSet result = CALL.getResultSet();
+					
+					switch(result.getInt(id_element)){
+						case 1 :
+							elements.addElement()
+					}
 				}
 			} 
 
