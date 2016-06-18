@@ -1,84 +1,98 @@
--- phpMyAdmin SQL Dump
--- version 4.5.5.1
+﻿-- phpMyAdmin SQL Dump
+-- version 4.4.10
 -- http://www.phpmyadmin.net
 --
--- Client :  127.0.0.1
--- Généré le :  Jeu 02 Juin 2016 à 23:02
--- Version du serveur :  5.7.11
--- Version de PHP :  5.6.19
-
+-- Client :  localhost:8889
+-- Généré le :  Ven 17 Juin 2016 à 20:40
+-- Version du serveur :  5.5.42
+-- Version de PHP :  7.0.0
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
--- Base de données :  `jpublankproject`
+-- Base de données :  `bd`
 --
-CREATE DATABASE `jpublankproject` ;
-
-USE `jpublankproject` ;
-
-DELIMITER $$
---
--- Procédures
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `helloworldById` (IN `p_id` INT)  READS SQL DATA
-    SQL SECURITY INVOKER
-SELECT * FROM helloworld WHERE id = p_id$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `HelloworldByKey` (IN `p_key` VARCHAR(2))  READS SQL DATA
-    SQL SECURITY INVOKER
-SELECT * FROM jpublankproject.helloworld where `key`=p_key$$
-
-DELIMITER ;
-
 -- --------------------------------------------------------
-
 --
--- Structure de la table `helloworld`
+-- Structure de la table `composition`
 --
-
-CREATE TABLE `helloworld` (
-  `id` int(11) NOT NULL,
-  `key` varchar(2) NOT NULL,
-  `message` varchar(100) NOT NULL
+CREATE TABLE `composition` (
+  `id_composition` int(11) NOT NULL,
+  `x` int(11) DEFAULT NULL,
+  `y` int(11) DEFAULT NULL,
+  `id_element` int(11) DEFAULT NULL,
+  `num_map` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+--
+-- Contenu de la table `composition`
+--
+INSERT INTO `composition` (`id_composition`, `x`, `y`, `id_element`, `num_map`) VALUES
+(1, 0, 0, 1, 1),
+(2, 1, 1, 1, 1);
+-- --------------------------------------------------------
+--
+-- Structure de la table `element`
+--
+CREATE TABLE `element` (
+  `id_element` int(11) NOT NULL,
+  `name_element` varchar(25) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+--
+-- Contenu de la table `element`
+--
+INSERT INTO `element` (`id_element`, `name_element`) VALUES
+(1, 'bone'),
+(2, 'stone');
+-- --------------------------------------------------------
+--
+-- Structure de la table `map`
+--
+CREATE TABLE `map` (
+  `num_map` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 --
--- Contenu de la table `helloworld`
+-- Contenu de la table `map`
 --
-
-INSERT INTO `helloworld` (`id`, `key`, `message`) VALUES
-(1, 'GB', 'Hello world'),
-(2, 'FR', 'Bonjour le monde'),
-(3, 'DE', 'Hallo Welt'),
-(4, 'ID', 'Salamat pagi dunia');
-
+INSERT INTO `map` (`num_map`) VALUES
+(1);
 --
 -- Index pour les tables exportées
 --
-
 --
--- Index pour la table `helloworld`
+-- Index pour la table `composition`
 --
-ALTER TABLE `helloworld`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `key_UNIQUE` (`key`);
-
+ALTER TABLE `composition`
+  ADD PRIMARY KEY (`id_composition`),
+  ADD KEY `FK_composition_id_element` (`id_element`),
+  ADD KEY `FK_composition_num_map` (`num_map`);
+--
+-- Index pour la table `element`
+--
+ALTER TABLE `element`
+  ADD PRIMARY KEY (`id_element`);
+--
+-- Index pour la table `map`
+--
+ALTER TABLE `map`
+  ADD PRIMARY KEY (`num_map`);
 --
 -- AUTO_INCREMENT pour les tables exportées
 --
-
 --
--- AUTO_INCREMENT pour la table `helloworld`
+-- AUTO_INCREMENT pour la table `composition`
 --
-ALTER TABLE `helloworld`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+ALTER TABLE `composition`
+  MODIFY `id_composition` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `element`
+--
+ALTER TABLE `element`
+  MODIFY `id_element` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- Contraintes pour les tables exportées
+--
+--
+-- Contraintes pour la table `composition`
+--
+ALTER TABLE `composition`
+  ADD CONSTRAINT `FK_composition_id_element` FOREIGN KEY (`id_element`) REFERENCES `element` (`id_element`),
+  ADD CONSTRAINT `FK_composition_num_map` FOREIGN KEY (`num_map`) REFERENCES `map` (`num_map`);

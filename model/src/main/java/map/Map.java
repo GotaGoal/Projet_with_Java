@@ -11,7 +11,7 @@ import map.element.Element;
 import map.element.mobile.Lorann;
 import map.element.mobile.Mobile;
 import aedt.showboard.BoardFrame;
-public class Map implements Runnable{
+public class Map extends Entity implements Runnable{
 	
 	/**
 	 * 
