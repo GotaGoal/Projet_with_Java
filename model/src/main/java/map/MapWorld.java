@@ -82,12 +82,6 @@ public class MapWorld extends Observable {
 		this.addMobile((Mobile) lorann, x, y);
 	}
 
-	//Maxime Bigot doit passer un coup de fil pour modifier cette fonction
-	
-	////
-	///
-	////
-	//
 	private void loadFile(final String fileName) throws IOException {
 		final BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
 		String line;
@@ -108,6 +102,8 @@ public class MapWorld extends Observable {
 			//System.out.print(line);
 		}
 		buffer.close();
+		
+		
 	}
 	
 	public ArrayList<Mobile> getMobiles() {
