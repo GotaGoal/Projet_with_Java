@@ -123,7 +123,7 @@ public class MapPlay implements IOrderPerformed{
 */
 		private void resolveWorldAnswer() throws IOException {
 			this.getMapWorld().addMobile(new Lorann(), 3, 3);
-			this.getMapFrame().setMeeting(this.getMapWorld(),this);
+			this.getMapFrame().setMeeting(this.getMapWorld());
 			System.out.println("je suis la ");
 			this.getMapFrame();
 			

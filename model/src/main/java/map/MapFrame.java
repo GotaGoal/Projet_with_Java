@@ -42,14 +42,14 @@ public class MapFrame extends JFrame implements KeyListener {
 		this.setVisible(true);
 	}
 	
-	public void setMeeting(final MapWorld mapWorld,IOrderPerformed mapPlay) {
+	public void setMeeting(final MapWorld mapWorld) {
 		
 		this.getContentPane().removeAll();
 		if (this.mapPanel != null) {
 			
 			this.mapCardView.removeLayoutComponent(this.mapPanel);
 		}
-		this.mapPlay = mapPlay;
+		
 		this.setTitle("nique bien ta mère");
 		
 		this.mapPanel = new MapPanel(new Dimension(mapWorld.getWidth(), mapWorld.getHeight()), mapWorld.getElements(),
@@ -58,6 +58,7 @@ public class MapFrame extends JFrame implements KeyListener {
 		//this.addKeyListener(this);
 		
 		this.getContentPane().add(this.mapPanel, "MAP");
+		this.revalidate();
 		
 		
 	}
