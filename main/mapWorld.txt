@@ -3,11 +3,11 @@
 BHHHHHHHHHHHHHHHHHHB
 VD                 V
 V   B    B         V
-V   H    H      HBBV
-V   B    B      H  V
+V   V    V      BHBV
+V   B    B      V  V
 V  BHHHHHHB   BHB  V
-V         HB    H HV
-V  BHHHHB H     H  V
-V  H    H HB  HHB BV
-V HB    H H        V
+V         VB    V HB
+V  BHHHHB V     V  V
+V  V    V VB  HHB BV
+V BB    V V        V
 BHBBHHHHBHBHHHHHHHHB

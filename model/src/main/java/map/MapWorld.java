@@ -130,6 +130,7 @@ public class MapWorld extends Observable {
 	
 	
 	
+	
 /*
 	public void setElements(final Element[][] elements) {
 		this.elements = elements;

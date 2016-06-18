@@ -1,5 +1,6 @@
 package map;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -70,8 +71,9 @@ abstract class DAOEntity<E extends Entity> {
 	 * @param id
 	 *          the id
 	 * @return the e
+	 * @throws IOException 
 	 */
-	public abstract E find(int id);
+	public abstract E find(int id) throws IOException;
 
 	/**
 	 * Find.
