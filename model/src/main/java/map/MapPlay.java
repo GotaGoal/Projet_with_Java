@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import map.element.Sprite;
 import map.element.mobile.Lorann;
+import map.element.motionless.IDoActionOnHeroes;
 
 import java.awt.event.KeyEvent;
 
@@ -12,11 +13,12 @@ public class MapPlay implements IOrderPerformed{
 	private  MapFrame mapFrame;
 	
 
-		private final MapWorld mapWorld;
+		private MapWorld mapWorld;
 
 		public MapPlay(final MapWorld mapWorld) {
 			this.mapWorld = mapWorld;
 			this.mapWorld.addMobile(new Lorann(), 2, 2);
+			
 		
 		}
 		public MapWorld getMapWorld()
@@ -30,7 +32,7 @@ public class MapPlay implements IOrderPerformed{
 		public void setMapFrame(final MapFrame mapFrame) {
 			this.mapFrame = mapFrame;
 		}
-		public MapWorld getActuelMapWorld() {
+		private MapWorld getActuelMapWorld() {
 			
 			return this.getMapWorld();
 		}
@@ -64,8 +66,69 @@ public class MapPlay implements IOrderPerformed{
 						break;
 				
 			}
+				this.getWorldAnswer();
 		}
-	}
+		
+		private void getWorldAnswer() throws IOException {
+			final IDoActionOnHeroes element = this.getActuelMapWorld().getElements(this.getActuelMapWorld().getLorann().getX(),
+					this.getActuelMapWorld().getLorann().getY());
+
+			switch (element.getActionOnHeroes()) {
+				case UP:
+					MapView.displayMessage("You enter in a New Level.");
+					this.resolveUp();
+					break;
+				/*case ENTER_TOWN:
+					NettleView.displayMessage("You enter a town.");
+					this.resolveEnterTown();
+					break;
+				case ENTER_MONASTERY:
+					NettleView.displayMessage("You enter a monastery.");
+					this.resolveEnterMonastery();
+					break;
+				case EXIT:
+					NettleView.displayMessage("You leave this place.");
+					this.exitMetting();
+					break;
+				case ESCAPE:
+					NettleView.displayMessage("You escape this place.");
+					this.escapeMetting();
+					break;
+				case NOP:*/
+				
+				default:
+					break;
+			}
+		}
+		
+		private void resolveUp() throws IOException {
+			this.setMapWorld(new MapWorld("test.txt"));
+			
+			this.resolveWorldAnswer();
+		}
+/*
+		private void resolveEnterTown() throws IOException {
+			this.setNettleMeeting(new NettleWorld("town.txt"));
+			this.resolveWorldAnswer();
+		}
+
+		private void resolveEnterMonastery() throws IOException {
+			this.setNettleMeeting(new NettleWorld("monastery.txt"));
+			this.resolveWorldAnswer();
+		}
+*/
+		private void resolveWorldAnswer() throws IOException {
+			this.getMapWorld().addMobile(new Lorann(), 15, 15);
+			this.getMapFrame().setMeeting(this.getMapWorld());
+			System.out.println("je suis la ");
+			this.getMapFrame();
+			
+		}
+		
+		private void setMapWorld(final MapWorld map) {
+			this.mapWorld= map;
+		}
+}
 
 
 
