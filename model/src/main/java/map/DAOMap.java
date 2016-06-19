@@ -18,7 +18,6 @@ import map.element.motionless.MotionlessElements;
  * @author Jean-Aymeric Diet
  */
 class DAOMap extends DAOEntity<Map> {
-	private MapWorld mapWorld;
 
 	/**
 	 * Instantiates a new DAO hello world.
