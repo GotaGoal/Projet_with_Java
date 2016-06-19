@@ -52,10 +52,8 @@ public class MapWorld extends Observable {
 	}
 	public MapWorld(int id) throws IOException {
 		this();
-<<<<<<< HEAD
 		this.loadFile(1);
-=======
-		switch(id)
+		/*switch(id)
 		{
 		case 1:
 			this.loadFile("mapWorld.txt");
@@ -68,8 +66,7 @@ public class MapWorld extends Observable {
 			break;
 		default:
 			break;
-		}
->>>>>>> origin/benjamin
+		}*/
 	}
 	
 	
@@ -135,7 +132,6 @@ public class MapWorld extends Observable {
 	}
 	
 
-<<<<<<< HEAD
 	private void loadFile(final int mapID) throws IOException {
 		try {
 			final DAOMap daomap = new DAOMap(DBConnection.getInstance().getConnection());
@@ -168,8 +164,9 @@ public class MapWorld extends Observable {
 		
 		} catch (final SQLException e) {
 			e.printStackTrace();
-=======
-	private void loadFile(final String fileName) throws IOException {
+		}
+	}
+	/*private void loadFile(final String fileName) throws IOException {
 		final BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
 		String line;
 		int numLine = 0;
@@ -212,7 +209,7 @@ public class MapWorld extends Observable {
 		}
 		
 		
-	}
+	}*/
 	
 	public ArrayList<Mobile> getMobiles() {
 		
