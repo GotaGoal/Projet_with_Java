@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -35,7 +36,7 @@ public class MapWorld extends Observable {
 	}
 	public MapWorld(final String fileName) throws IOException {
 		this();
-		this.loadFile(fileName);
+		this.loadFile(1);
 	}
 	
 
@@ -90,24 +91,39 @@ public class MapWorld extends Observable {
 		this.addMobile((Mobile) lorann, x, y);
 	}
 
-	private void loadFile(final String fileName) throws IOException {
-		final BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
-		String line;
-		int numLine = 0;
-		line = buffer.readLine();
-		this.width = Integer.parseInt(line);
-		line = buffer.readLine();
-		this.height = Integer.parseInt(line);
-		this.elements = new MotionlessElement[this.getWidth()][this.getHeight()];
-		while ((line = buffer.readLine()) != null) {
-			for (int x = 0; x < line.toCharArray().length; x++) {
-				this.addElement(MotionlessElements.getFromFileSymbol(line.toCharArray()[x]), x, numLine);
-				//System.out.print(line.toCharArray()[x]);
-			}
-			numLine++;
-			//System.out.print(line);
+	private void loadFile(final int mapID) throws IOException {
+		try {
+			final DAOMap daomap = new DAOMap(DBConnection.getInstance().getConnection());
+			this.width = daomap.getTailleMapX(mapID);
+			this.height = daomap.getTailleMapY(mapID);
+			this.elements = new MotionlessElement[this.getWidth()][this.getHeight()];
+			for (int x = 0; x < this.width; x++) {
+				for (int y = 0 ; y < this.height; y++) {
+					switch (daomap.getElementBDD(mapID, x, y)){
+					
+					case 1:
+						this.addElement(MotionlessElements.getFromFileSymbol('V'), x, y);
+						break;
+					case 2:
+						this.addElement(MotionlessElements.getFromFileSymbol('H'), x, y);
+						break;
+					case 4:
+						this.addElement(MotionlessElements.getFromFileSymbol('B'), x, y);
+						break;
+					case 5:
+						this.addElement(MotionlessElements.getFromFileSymbol('D'), x, y);
+						break;
+					default :
+						this.addElement(MotionlessElements.getFromFileSymbol(' '), x, y);
+						break;
+					}
+					
+				}
+			} 
+		
+		} catch (final SQLException e) {
+			e.printStackTrace();
 		}
-		buffer.close();
 		
 		
 	}

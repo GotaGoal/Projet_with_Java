@@ -98,7 +98,7 @@ class DAOMap extends DAOEntity<Map> {
 		int valeur_x = Integer.parseInt(line);
 		line = buffer.readLine();
 		int valeur_y = Integer.parseInt(line);
-		final String SQL = "{call taille_map(?, ?, ?, ?)}";
+		final String SQL = "{call taille_map(?, ?, ?,)}";
 		try {
 		final CallableStatement CALL = this.getConnection().prepareCall(SQL);
 		CALL.setInt(1, valeur_x);
@@ -147,39 +147,63 @@ class DAOMap extends DAOEntity<Map> {
 		
 	}
 	
-	public void loadMap(final int mapID, MotionlessElement elements[][]) throws IOException {
+	public int getTailleMapX(final int mapID) throws IOException {
 		final String sql = "{call get_taille_map(?)}";
-		final String x = "x";
-		final String y = "y";
-		final String id_element = "id_element";
+		int valeur_x = 0;
 		try {
 			final CallableStatement call = this.getConnection().prepareCall(sql);
 			call.setInt(1, mapID);
 			call.execute();
 			final ResultSet resultSet = call.getResultSet();
-			mapWorld.elements = new MotionlessElement[resultSet.getInt(x)][resultSet.getInt(y)];
-			for (int valeur_x = 0; valeur_x < resultSet.getInt(x); valeur_x++) {
-				for (int valeur_y = 0; valeur_y < resultSet.getInt(y); valeur_y++) {
-					final String SQL = "{call get_element(?, ?, ?)}";
-					final CallableStatement CALL = this.getConnection().prepareCall(SQL);
-					CALL.setInt(1, valeur_x);
-					CALL.setInt(2, valeur_y);
-					CALL.setInt(3, mapID);
-					CALL.execute();
-					final ResultSet result = CALL.getResultSet();
-					
-					switch(result.getInt(id_element)){
-						case 1 :
-							mapWorld.addElement(MotionlessElements./getFromFileSymbol==>getFromNomBDD, x, y);
-					}
-				}
-			} 
-
-		} 
+			if(resultSet.first()){;
+				valeur_x = resultSet.getInt(2);
+			}
+		
+		}	 
 		catch (final SQLException e) {
 			e.printStackTrace();
 		}
-				
+		return valeur_x;		
+	}
+	
+	public int getTailleMapY(final int mapID) throws IOException {
+		final String sql = "{call get_taille_map(?)}";
+		int valeur_y = 0;
+		try {
+			final CallableStatement call = this.getConnection().prepareCall(sql);
+			call.setInt(1, mapID);
+			call.execute();
+			final ResultSet resultSet = call.getResultSet();
+			if(resultSet.first()){;
+				valeur_y = resultSet.getInt(3);
+			}
+		
+		}	 
+		catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return valeur_y;		
+	}
+	
+	public int getElementBDD(final int mapID, final int x, final int y) throws IOException {
+		final String sql = "{call get_element(?, ?, ?)}";
+		int valeur_id = 0;
+		try {
+			final CallableStatement call = this.getConnection().prepareCall(sql);
+			call.setInt(1, x);
+			call.setInt(2, y);
+			call.setInt(3, mapID);
+			call.execute();
+			final ResultSet resultSet = call.getResultSet();
+			if(resultSet.first()){;
+				valeur_id = resultSet.getInt(1);
+			}
+		
+		}	 
+		catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return valeur_id;		
 	}
 
 	@Override
