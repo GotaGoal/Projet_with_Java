@@ -1,38 +1,32 @@
 package map.element.mobile;
 
 
+import map.IOrientation;
+import map.Orientation;
 import map.element.Sprite;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 
-public class Lorann extends Mobile   {
-	private Image image;
+public class Lorann extends Mobile implements IOrientation   {
+	private Orientation orientation;
 	
-	public Lorann() {
+	public Lorann(Orientation orientation) {
 		super(new Sprite("☺!","lorann.png"));
+		this.orientation = orientation;
 	}
 	
-	public void setContextuelImage(final int pos) throws IOException
-	{
-		switch (pos)
-		{
-		 case 1:
-			 /*
-			 this.setImage("land.png");
-			 this.getMapWorld().setMobileHasChanged();
-			 */
-		}
-	}
-/*
 	@Override
-	public void setImage(String image) throws IOException {
-		this.image = ImageIO.read(new File("images/" + image));
+	public Orientation getOrientation() {
+		// TODO Auto-generated method stub
+		return this.orientation;
+	}
+
+	@Override
+	public void setOrientation(Orientation orient) {
+		this.orientation = orient;
+		
 		
 	}
-	*/
+	
 
 	
 	

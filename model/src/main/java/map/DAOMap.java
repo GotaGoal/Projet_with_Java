@@ -170,7 +170,7 @@ class DAOMap extends DAOEntity<Map> {
 					
 					switch(result.getInt(id_element)){
 						case 1 :
-							mapWorld.addElement(MotionlessElements./getFromFileSymbol==>getFromNomBDD, x, y);
+							//mapWorld.addElement(MotionlessElements./getFromFileSymbol==>getFromNomBDD, x, y);
 					}
 				}
 			} 
