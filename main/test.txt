@@ -1,0 +1,21 @@
+20
+11
+2
+2
+10
+2
+2
+1
+18
+1
+BHHHHHHHHHHHHHHHHHHB
+V                  V
+V   B    B         V
+V   V    V      BHBV
+VBBBBBBBBBBBBBBBBBBB
+V  BHHHHHHB   BHB  V
+V         VB    V HB
+V  BHHHHB V     V  V
+V  V    V VB  HHB BV
+V BB    V V        V
+BHBBHHHHBHBHHHHHHHHB
