@@ -26,8 +26,10 @@ public class Map extends Entity implements Runnable{
 	private  MapFrame mapFrame;
 
 	public Map() throws IOException {
-		this.mapWorld = new MapWorld("mapWorld.txt");
+		this.mapWorld = new MapWorld(1);
+		
 		this.mapPlay = new MapPlay(this.mapWorld);
+		
 		
 		/*
 		this.WINDOW_WIDTH = mapWorld.getWidth();

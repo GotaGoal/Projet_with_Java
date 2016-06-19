@@ -1,29 +1,35 @@
 package map;
+import java.awt.Color;
 import java.io.IOException;
 
-
+import javax.swing.JLabel;
 
 import map.element.Sprite;
+import map.element.mobile.Fireball;
 import map.element.mobile.Lorann;
 import map.element.motionless.Energy;
 import map.element.motionless.IDoActionOnHeroes;
+import map.element.motionless.*;
 
 
 
 public class MapPlay implements IOrderPerformed{
 	private  MapFrame mapFrame;
-
-	
-
 		private MapWorld mapWorld;
-		private Energy energy;
+		private int calcul_level = 1;
+		private int score = 0;
 
 		public MapPlay(final MapWorld mapWorld) {
 			this.mapWorld = mapWorld;
-			this.energy = new Energy();
 			
-			this.mapWorld.addMobile(new Lorann(), 2, 2);
-			this.mapWorld.addElement(this.energy, 10, 2);
+			
+			
+			
+			this.mapWorld.addMobile(new Lorann(Orientation.ND), this.mapWorld.getPointSpawnLorannX(), this.mapWorld.getPointSpawnLorannX());
+			this.mapWorld.addElement(new Energy(), this.mapWorld.getPointEnergyX(), this.mapWorld.getPointEnergyY());
+			this.mapWorld.addElement(new Gate_Close(), this.mapWorld.getPointGateCloseX(), this.mapWorld.getPointGateCloseY());
+			this.mapWorld.addElement(new Treasure(), this.mapWorld.getPointTreasureX(), this.mapWorld.getPointTreasureY());
+			
 			
 		
 		}
@@ -48,24 +54,33 @@ public class MapPlay implements IOrderPerformed{
 				switch (userOrder) {
 					case UP:
 						this.getActuelMapWorld().getLorann().moveUp();
+						this.getActuelMapWorld().getLorann().setOrientation(Orientation.NORTH);
 						this.mapWorld.getLorann().setSprite(new Sprite("☺!","lorann_u.png"));
 						
 						break;
 					case RIGHT:
 						this.getActuelMapWorld().getLorann().moveRight();
+						this.getActuelMapWorld().getLorann().setOrientation(Orientation.EAST);
 						this.mapWorld.getLorann().setSprite(new Sprite("☺!","lorann_r.png"));
 						
 						break;
 					case DOWN:
 						this.getActuelMapWorld().getLorann().moveDown();
+						this.getActuelMapWorld().getLorann().setOrientation(Orientation.SOUTH);
 						this.mapWorld.getLorann().setSprite(new Sprite("☺!","lorann_b.png"));
 						
 						break;
 					case LEFT:
 						this.getActuelMapWorld().getLorann().moveLeft();
+						this.getActuelMapWorld().getLorann().setOrientation(Orientation.WEST);
 						this.mapWorld.getLorann().setSprite(new Sprite("☺!","lorann_bl.png"));
+					
+					/*case SPACE:
 						
-						break;
+						
+						this.mapWorld.addMobile(new Fireball(this.mapWorld.getLorann().getOrientation()), this.mapWorld.getLorann().getX(), this.mapWorld.getLorann().getY());
+						
+						break;*/
 					case NOP:
 						
 					default:
@@ -81,30 +96,39 @@ public class MapPlay implements IOrderPerformed{
 
 			switch (element.getActionOnHeroes()) {
 				case UP:
-					MapView.displayMessage("You enter in a New Level.");
+					
+					this.mapFrame.showMessage("You enter in a New Level.");
+					
 					this.resolveUp();
 					break;
-				case PICKUP:
-					MapView.displayMessage("You have found the boboll");
-					this.resolvePickUp();
+				case PICKUP_ENERGY:
+					this.mapFrame.showMessage("You have found the energy");
+					this.score+=100;
+					mapFrame.setTextChange();
+					
+					this.resolvePickUpEnergy();
 					break;
-				/*case ENTER_TOWN:
-					NettleView.displayMessage("You enter a town.");
-					this.resolveEnterTown();
+				case PICKUP_TREASURE:
+					this.mapFrame.showMessage("You have found the treasure");
+					this.score+=200;
+					mapFrame.setTextChange();
+					
+					this.resolvePickUpTreasure();
 					break;
-				case ENTER_MONASTERY:
-					NettleView.displayMessage("You enter a monastery.");
-					this.resolveEnterMonastery();
+				/*	
+				case PICKUP_FIREBALL:
+					this.mapFrame.showMessage("You have found the treasure");
+					this.score+=200;
+					mapFrame.setTextChange();
+					
+					this.resolvePickUpFireball();
 					break;
+					*/
 				case EXIT:
-					NettleView.displayMessage("You leave this place.");
-					this.exitMetting();
+					this.mapFrame.showMessage("You go back now");
+					this.resolveExit();
 					break;
-				case ESCAPE:
-					NettleView.displayMessage("You escape this place.");
-					this.escapeMetting();
-					break;
-				case NOP:*/
+				
 				
 				default:
 					break;
@@ -112,13 +136,44 @@ public class MapPlay implements IOrderPerformed{
 		}
 		
 		private void resolveUp() throws IOException {
+			this.calcul_level = this.calcul_level+1;
 			
-			this.setMapWorld(new MapWorld("test.txt"));
+			this.setMapWorld(new MapWorld(this.calcul_level));
+			
 			
 			
 			this.resolveWorldAnswer();
 		}
-		private void resolvePickUp() throws IOException {
+		private void resolveExit() throws IOException {
+			this.calcul_level = this.calcul_level-1;
+			
+			this.setMapWorld(new MapWorld(this.calcul_level));
+			
+			
+			
+			this.resolveWorldAnswer();
+		}
+		/*
+		private void resolvePickUpFireball() throws IOException {
+			this.mapWorld.addElement(new Land(), this.mapWorld.getFireball().getX(), this.mapWorld.getFireball().getY());
+			this.resolveWorldAnswer();
+		}*/
+		
+		private void resolvePickUpEnergy() throws IOException {
+			
+			
+			this.mapWorld.addElement(new Land(), this.mapWorld.getPointEnergyX(), this.mapWorld.getPointEnergyY());
+			
+			this.mapWorld.addElement(new Gate_Open_Level_Up() , this.mapWorld.getPointGateCloseX(), this.mapWorld.getPointGateCloseY());
+			//this.mapWorld.removeObject(this.energy);
+			
+			
+		}
+		private void resolvePickUpTreasure() throws IOException {
+			
+			
+			this.mapWorld.addElement(new Land(), this.mapWorld.getPointTreasureX(), this.mapWorld.getPointTreasureY());
+			
 			
 			//this.mapWorld.removeObject(this.energy);
 			
@@ -136,7 +191,12 @@ public class MapPlay implements IOrderPerformed{
 		}
 */
 		private void resolveWorldAnswer() throws IOException {
-			this.getMapWorld().addMobile(new Lorann(), 3, 3);
+			
+			this.getMapWorld().addMobile(new Lorann(Orientation.ND), this.getActuelMapWorld().getPointSpawnLorannX(), this.getActuelMapWorld().getPointSpawnLorannY());
+			this.getMapWorld().addElement(new Energy(), this.getActuelMapWorld().getPointEnergyX(), this.getActuelMapWorld().getPointEnergyY());
+			this.getMapWorld().addElement(new Gate_Open(), this.getActuelMapWorld().getPointGateOpenX(), this.getActuelMapWorld().getPointGateOpenY());
+			this.getMapWorld().addElement(new Gate_Close(), this.getActuelMapWorld().getPointGateCloseX(),this.getActuelMapWorld().getPointGateCloseY());
+			this.getMapWorld().addElement(new Treasure(), this.getActuelMapWorld().getPointTreasureX(),this.getActuelMapWorld().getPointTreasureY());
 			this.getMapFrame().setMeeting(this.getMapWorld());
 			System.out.println("je suis la ");
 			this.getMapFrame();
@@ -145,6 +205,11 @@ public class MapPlay implements IOrderPerformed{
 		
 		private void setMapWorld(final MapWorld map) {
 			this.mapWorld= map;
+		}
+		@Override
+		public int getScore() {
+			// TODO Auto-generated method stub
+			return this.score;
 		}
 }
 

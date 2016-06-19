@@ -29,7 +29,7 @@ public class Interactions extends Element implements IDoActionOnHeroes, IPawn {
 	@Override
 	public ActionOnHeroes getActionOnHeroes() {
 		// TODO Auto-generated method stub
-		return ActionOnHeroes.PICKUP;
+		return ActionOnHeroes.PICKUP_TREASURE;
 	}
 	public void setMapWorld(final MapWorld mapWorld, final int x, final int y) {
 		super.setMapWorld(mapWorld);

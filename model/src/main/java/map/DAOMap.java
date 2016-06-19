@@ -155,11 +155,33 @@ class DAOMap extends DAOEntity<Map> {
 			call.setInt(1, mapID);
 			call.execute();
 			final ResultSet resultSet = call.getResultSet();
+<<<<<<< HEAD
 			if(resultSet.first()){;
 				valeur_x = resultSet.getInt(2);
 			}
 		
 		}	 
+=======
+			mapWorld.elements = new MotionlessElement[resultSet.getInt(x)][resultSet.getInt(y)];
+			for (int valeur_x = 0; valeur_x < resultSet.getInt(x); valeur_x++) {
+				for (int valeur_y = 0; valeur_y < resultSet.getInt(y); valeur_y++) {
+					final String SQL = "{call get_element(?, ?, ?)}";
+					final CallableStatement CALL = this.getConnection().prepareCall(SQL);
+					CALL.setInt(1, valeur_x);
+					CALL.setInt(2, valeur_y);
+					CALL.setInt(3, mapID);
+					CALL.execute();
+					final ResultSet result = CALL.getResultSet();
+					
+					switch(result.getInt(id_element)){
+						case 1 :
+							//mapWorld.addElement(MotionlessElements./getFromFileSymbol==>getFromNomBDD, x, y);
+					}
+				}
+			} 
+
+		} 
+>>>>>>> origin/benjamin
 		catch (final SQLException e) {
 			e.printStackTrace();
 		}

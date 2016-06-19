@@ -1,5 +1,5 @@
 package map;
 
 public enum Orientation {
-	NORTH,SOUTH,EAST,WEST;
+	NORTH,SOUTH,EAST,WEST,ND;
 }
