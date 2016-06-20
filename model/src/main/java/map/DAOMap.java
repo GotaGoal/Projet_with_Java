@@ -71,21 +71,6 @@ class DAOMap extends DAOEntity<Map> {
 	 */
 	@Override
 	public Map find(final int id) throws IOException {
-		Map MapWorld = new Map();
-
-		try {
-			final String sql = "{call helloworldById(?)}";
-			final CallableStatement call = this.getConnection().prepareCall(sql);
-			call.setInt(1, id);
-			call.execute();
-			final ResultSet resultSet = call.getResultSet();
-			if (resultSet.first()) {
-				MapWorld = new Map(/*id, resultSet.getString("key"), resultSet.getString("message")*/);
-			}
-			return MapWorld;
-		} catch (final SQLException e) {
-			e.printStackTrace();
-		}
 		return null;
 	}
 	

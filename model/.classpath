@@ -23,9 +23,9 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Benjamin/Projet_with_Java/aedt.showboard.jar">
+	<classpathentry kind="lib" path="C:/Users/Maxime/Documents/Projet_with_Java/aedt.showboard.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/Users/Benjamin/Projet_with_Java/aedt.showboard.doc%20(1).jar!/doc"/>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/Maxime/Documents/Projet_with_Java/aedt.showboard.doc%20(1).jar!/doc"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>

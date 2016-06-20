@@ -179,17 +179,6 @@ public class MapPlay implements IOrderPerformed{
 			
 			
 		}
-/*
-		private void resolveEnterTown() throws IOException {
-			this.setNettleMeeting(new NettleWorld("town.txt"));
-			this.resolveWorldAnswer();
-		}
-
-		private void resolveEnterMonastery() throws IOException {
-			this.setNettleMeeting(new NettleWorld("monastery.txt"));
-			this.resolveWorldAnswer();
-		}
-*/
 		private void resolveWorldAnswer() throws IOException {
 			
 			this.getMapWorld().addMobile(new Lorann(Orientation.ND), this.getActuelMapWorld().getPointSpawnLorannX(), this.getActuelMapWorld().getPointSpawnLorannY());
