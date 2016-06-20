@@ -10,7 +10,7 @@ import map.element.Sprite;
 import map.element.motionless.ActionOnHeroes;
 import map.element.motionless.IDoActionOnHeroes;
 
-public class Interactions extends Element implements IDoActionOnHeroes, IPawn {
+public class Interactions extends Element implements IPawn {
 	private char fileSymbol;
 	private Point position;
 	
@@ -25,12 +25,6 @@ public class Interactions extends Element implements IDoActionOnHeroes, IPawn {
 		return this.fileSymbol;
 	}
 
-
-	@Override
-	public ActionOnHeroes getActionOnHeroes() {
-		// TODO Auto-generated method stub
-		return ActionOnHeroes.PICKUP_TREASURE;
-	}
 	public void setMapWorld(final MapWorld mapWorld, final int x, final int y) {
 		super.setMapWorld(mapWorld);
 		this.setX(x);

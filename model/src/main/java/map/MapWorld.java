@@ -14,6 +14,7 @@ import map.element.interactions.Interactions;
 import map.element.mobile.Fireball;
 import map.element.mobile.Lorann;
 import map.element.mobile.Mobile;
+import map.element.mobile.MonsterFour;
 import map.element.motionless.MotionlessElements;
 import map.element.motionless.MotionlessElement;
 
@@ -23,7 +24,7 @@ public class MapWorld extends Observable {
 	public MotionlessElement		elements[][];
 	public final ArrayList<Mobile>	mobiles;
 	
-	
+	private MonsterFour monsterFour;
 	private Lorann lorann;
 	private Fireball fireball;
 	
@@ -317,7 +318,19 @@ public class MapWorld extends Observable {
 		this.fireball = fireball;
 	}
 	
+	public MonsterFour getMonsterFour()
+	{
+		return this.monsterFour;
+	}
 	
+	public void setMonsterFour(final MonsterFour monsterFour) {
+		this.monsterFour = monsterFour;
+		this.setChanged();
+	}
+	public void addMobile(final MonsterFour monsterFour, final int x, final int y) {
+		this.setMonsterFour(monsterFour);
+		this.addMobile((Mobile) monsterFour, x, y);
+	}
 	
 	
 /*

@@ -13,7 +13,7 @@ public abstract class Mobile extends Element implements IPawn{
 	private final Point position;
 
 	public Mobile(final Sprite sprite) {
-		super(sprite, Permeability.BLOCKING);
+		super(sprite, Permeability.PENETRABLE);
 		this.position = new Point();
 	}
 
@@ -22,7 +22,7 @@ public abstract class Mobile extends Element implements IPawn{
 		return this.position.x;
 	}
 
-	private void setX(final int x) {
+	public void setX(final int x) {
 		if ((x >= 0) && (x < this.getMapWorld().getWidth())) {
 			this.position.x = x;
 			this.getMapWorld().setMobileHasChanged();
@@ -34,7 +34,7 @@ public abstract class Mobile extends Element implements IPawn{
 		return this.position.y;
 	}
 
-	private void setY(final int y) {
+	public void setY(final int y) {
 		if ((y >= 0) && (y < this.getMapWorld().getHeight())) {
 			this.position.y = y;
 			this.getMapWorld().setMobileHasChanged();
