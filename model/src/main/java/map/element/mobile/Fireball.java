@@ -18,7 +18,7 @@ public class Fireball extends Mobile implements IDoActionOnHeroes   {
 		
 		// TODO Auto-generated constructor stub
 	}
-	@Override
+	
 	public ActionOnHeroes getActionOnHeroes() {
 		// TODO Auto-generated method stub
 		return ActionOnHeroes.PICKUP_FIREBALL;

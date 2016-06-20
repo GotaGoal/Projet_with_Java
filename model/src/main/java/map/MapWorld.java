@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Observable;
 
-
+import contract.IMapWorld;
 import map.element.Element;
 import map.element.interactions.Interactions;
 import map.element.mobile.Fireball;
@@ -16,9 +16,10 @@ import map.element.mobile.Lorann;
 import map.element.mobile.Mobile;
 import map.element.mobile.MonsterFour;
 import map.element.motionless.MotionlessElements;
+import view.MapPanel;
 import map.element.motionless.MotionlessElement;
 
-public class MapWorld extends Observable {
+public class MapWorld extends Observable implements IMapWorld{
 	
 	
 	public MotionlessElement		elements[][];
@@ -70,20 +71,21 @@ public class MapWorld extends Observable {
 		}
 	}
 	
-	
-
-	public int getWidth() {
+	@Override 
+  public int getWidth() {
 		return this.width;
 	}
-
+  @Override
 	public int getHeight() {
 		return this.height;
 	}
+	@Override
 	public Lorann getLorann()
 	{
 		return this.lorann;
 	}
-	
+   
+	@Override
 	public Element getElement(final int x, final int y) {
 		if ((x < 0) || (y < 0) || (x >= this.getWidth()) || (y >= this.getHeight())) {
 			return null;
@@ -92,6 +94,7 @@ public class MapWorld extends Observable {
 		return this.elements[x][y];
 	}
 	
+	@Override
 	public MotionlessElement getElements(final int x, final int y) {
 		if ((x < 0) || (y < 0) || (x >= this.getWidth()) || (y >= this.getHeight())) {
 			return null;
@@ -99,13 +102,15 @@ public class MapWorld extends Observable {
 		return this.elements[x][y];
 	}
 	
-
+   
+	@Override
 	public void addElement(final MotionlessElement element, final int x, final int y) {
 		this.elements[x][y] = element;
 		if (element != null) {
 			element.setMapWorld(this);
 		}
 	}
+	@Override
 	public void addMobile(final Mobile mobile, final int x, final int y) {
 		this.mobiles.add(mobile);
 		mobile.setMapWorld(this, x, y);
@@ -119,21 +124,24 @@ public class MapWorld extends Observable {
 		this.setChanged();
 		this.notifyObservers();
 	}*/
+	@Override
 	public void addMobile(final Lorann lorann, final int x, final int y) {
 		this.setLorann(lorann);
 		this.addMobile((Mobile) lorann, x, y);
 	}
+	@Override
 	public int getPointSpawnLorannX()
 	{
 		return this.pointLorannX;
 	}
+	@Override
 	public int getPointSpawnLorannY()
 	{
 		return this.pointLorannY;
 	}
 	
-
-	private void loadMap(final int mapID) throws IOException {
+	@Override
+	public void loadMap(final int mapID) throws IOException {
 		try {
 			final DAOMap daomap = new DAOMap(DBConnection.getInstance().getConnection());
 			this.width = daomap.getTailleMapX(mapID);
@@ -183,7 +191,7 @@ public class MapWorld extends Observable {
 			e.printStackTrace();
 		}
 	}
-	
+	@Override
 	public void enregistrer(final String filename, final int mapID) throws IOException{
 		try {
 			final DAOMap daomap = new DAOMap(DBConnection.getInstance().getConnection());
@@ -193,8 +201,8 @@ public class MapWorld extends Observable {
 			e.printStackTrace();
 		}
 	}
-	
-	private void loadFile(final String fileName) throws IOException {
+	@Override
+	public void loadFile(final String fileName) throws IOException {
 		final BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
 		String line;
 		int numLine = 0;
@@ -238,100 +246,123 @@ public class MapWorld extends Observable {
 		
 		
 	}
-	
+	@Override
 	public ArrayList<Mobile> getMobiles() {
 		
 		return this.mobiles;
 		
 	}
-	
+	@Override
 	public void setLorann(final Lorann lorann) {
 		this.lorann = lorann;
 		this.setChanged();
 	}
-
+	@Override
 	public void setMobileHasChanged() {
 		this.setChanged();
 		this.notifyObservers();
 	}
-
 	@Override
+	 
 	public void notifyObservers() {
 		super.notifyObservers();
 	}
-
+	@Override 
 	public Element[][] getElements() {
 		return this.elements;
 	}
+	@Override 
 	public int getPointEnergyX() {
 		return pointEnergyX;
 	}
+	@Override
 	public void setPointEnergyX(int pointEnergyX) {
 		this.pointEnergyX = pointEnergyX;
 	}
+	@Override 
 	public int getPointEnergyY() {
 		return pointEnergyY;
 	}
+	@Override
 	public void setPointEnergyY(int pointEnergyY) {
 		this.pointEnergyY = pointEnergyY;
 	}
+	@Override 
 	public int getPointGateCloseX() {
 		return pointGateCloseX;
 	}
+	@Override
 	public void setPointGateCloseX(int pointGateCloseX) {
 		this.pointGateCloseX = pointGateCloseX;
 	}
+	@Override
 	public int getPointGateCloseY() {
 		return pointGateCloseY;
 	}
+	@Override
 	public void setPointGateCloseY(int pointGateCloseY) {
 		this.pointGateCloseY = pointGateCloseY;
 	}
+	@Override
 	public int getPointGateOpenX() {
 		return pointGateOpenX;
 	}
+	@Override
 	public void setPointGateOpenX(int pointGateOpenX) {
 		this.pointGateOpenX = pointGateOpenX;
 	}
+	@Override
 	public int getPointGateOpenY() {
 		return pointGateOpenY;
 	}
+	@Override
 	public void setPointGateOpenY(int pointGateOpenY) {
 		this.pointGateOpenY = pointGateOpenY;
 	}
+	@Override 
 	public int getPointTreasureX() {
 		return pointTreasureX;
 	}
+	@Override 
 	public void setPointTreasureX(int pointTreasureX) {
 		this.pointTreasureX = pointTreasureX;
 	}
+	@Override 
 	public int getPointTreasureY() {
 		return pointTreasureY;
 	}
+	@Override 
 	public void setPointTreasureY(int pointTreasureY) {
 		this.pointTreasureY = pointTreasureY;
 	}
+	@Override
 	public Fireball getFireball() {
 		return fireball;
 	}
+	@Override
 	public void setFireball(Fireball fireball) {
 		this.fireball = fireball;
 	}
-	
+	@Override
 	public MonsterFour getMonsterFour()
 	{
 		return this.monsterFour;
 	}
-	
+	@Override
 	public void setMonsterFour(final MonsterFour monsterFour) {
 		this.monsterFour = monsterFour;
 		this.setChanged();
 	}
+	@Override
 	public void addMobile(final MonsterFour monsterFour, final int x, final int y) {
 		this.setMonsterFour(monsterFour);
 		this.addMobile((Mobile) monsterFour, x, y);
 	}
 	
+	public void CallGetMonsterFour()
+	{
+		this.getMonsterFour();
+	}
 	
 /*
 	public void setElements(final Element[][] elements) {

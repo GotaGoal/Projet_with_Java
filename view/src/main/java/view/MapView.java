@@ -1,9 +1,11 @@
-package map;
+package view;
 
 
 import java.awt.event.KeyEvent;
 
 import javax.swing.JOptionPane;
+
+import contract.UserOrder;
 
 public abstract class MapView {
 	

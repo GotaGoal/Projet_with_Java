@@ -14,13 +14,13 @@ public class Lorann extends Mobile implements IOrientation   {
 		this.orientation = orientation;
 	}
 	
-	@Override
+	
 	public Orientation getOrientation() {
 		// TODO Auto-generated method stub
 		return this.orientation;
 	}
 
-	@Override
+	
 	public void setOrientation(Orientation orient) {
 		this.orientation = orient;
 		

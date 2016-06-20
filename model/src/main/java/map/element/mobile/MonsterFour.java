@@ -10,7 +10,7 @@ public class MonsterFour extends Mobile implements IDoActionOnHeroes {
 		super(new Sprite("  ","monster_4.png"));
 	}
 
-	@Override
+	
 	public ActionOnHeroes getActionOnHeroes() {
 		// TODO Auto-generated method stub
 		return ActionOnHeroes.DIE;

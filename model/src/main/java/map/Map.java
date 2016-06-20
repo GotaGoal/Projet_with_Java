@@ -11,7 +11,12 @@ import javax.swing.SwingUtilities;
 import map.element.Element;
 import map.element.mobile.Lorann;
 import map.element.mobile.Mobile;
+import view.MapFrame;
 import aedt.showboard.BoardFrame;
+import contract.IMapFrame;
+import contract.IMapPlay;
+import contract.IOrderPerformed;
+import controller.MapPlay;
 public class Map extends Entity implements Runnable{
 	
 	/**
@@ -22,7 +27,7 @@ public class Map extends Entity implements Runnable{
 	private Lorann Lorann;
 	private  int				WINDOW_WIDTH;
 	private  int				WINDOW_HEIGHT;
-	private MapPlay mapPlay;
+	private  MapPlay mapPlay;
 	private  MapFrame mapFrame;
 
 	public Map() throws IOException {
@@ -46,14 +51,13 @@ public class Map extends Entity implements Runnable{
 		
 	}
 	
-	@Override
 	public void run() {
 		//new Fenetre();
 		/*
 		final BoardFrame boardFrame = new BoardFrame("Lorann Yolo",
 				WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_HEIGHT, this.getMapWorld().getElements(), this.getMapWorld().getMobiles(), this.getMapWorld().getLorann().getPosition());
 		this.mapWorld.addObserver(boardFrame.getBoardPanel());*/
-		this.mapFrame = new MapFrame("Welcome to LorannWorld",this.getMapWorld(),this.getMapPlay());
+		this.mapFrame = new MapFrame("Welcome to LorannWorld",this.getMapWorld(), this.getMapPlay());
 		this.mapPlay.setMapFrame(this.mapFrame);
 		
 	}

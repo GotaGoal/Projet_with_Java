@@ -1,4 +1,4 @@
-package map;
+package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,7 +11,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-public class MapFrame extends JFrame implements KeyListener {
+import contract.IMapFrame;
+import contract.IMapWorld;
+import contract.IOrderPerformed;
+import map.MapWorld;
+
+
+public class MapFrame extends JFrame implements KeyListener,IMapFrame {
 	private static final long				serialVersionUID	= 1500600853286674118L;
 	
 	public  MapPanel	mapPanel;
@@ -27,7 +33,7 @@ public class MapFrame extends JFrame implements KeyListener {
 	
 	
 
-	public MapFrame(final String title, final MapWorld mapWorld,final IOrderPerformed mapPlay) {
+	public MapFrame(final String title, final IMapWorld mapWorld,final IOrderPerformed mapPlay) {
 		this.position = new Point();
 		
 	
@@ -45,7 +51,7 @@ public class MapFrame extends JFrame implements KeyListener {
 		this.mapPanel = new MapPanel(new Dimension(mapWorld.getWidth(), mapWorld.getHeight()), mapWorld.getElements(), mapWorld.getMobiles(),
 				this.position.getLocation(), ZOOM);
 		this.setResizable(false);
-		mapWorld.addObserver(this.mapPanel);
+		//mapWorld.addObserver(this.mapPanel);
 		this.addKeyListener(this);
 		this.mapCardView = new MapCardView();
 		
@@ -60,17 +66,19 @@ public class MapFrame extends JFrame implements KeyListener {
 		
 		this.setVisible(true);
 	}
+	@Override
 	public void setTextChange()
 	{
 		this.label.setText("Votre score actuel est de: "+String.valueOf(this.mapPlay.getScore()));
 	}
+	@Override
 	public void showMessage(final String message)
 	{
 		this.setBackground(Color.black);
 		JOptionPane.showMessageDialog(null, message);
 	}
-	
-	public void setMeeting(final MapWorld mapWorld) {
+	@Override
+	public void setMeeting(final IMapWorld mapWorld) {
 		
 		this.getContentPane().removeAll();
 		if (this.mapPanel != null) {
@@ -97,10 +105,10 @@ public class MapFrame extends JFrame implements KeyListener {
 		
 	}
 
-	private IOrderPerformed getMapPlay() {
+	public IOrderPerformed getMapPlay() {
 		return this.mapPlay;
 	}
-	private void setX(final int x)
+	public void setX(final int x)
 	{
 		this.position.x = x;
 	
@@ -131,6 +139,10 @@ public class MapFrame extends JFrame implements KeyListener {
 	@Override
 	public void keyTyped(final KeyEvent arg0) {
 	}
-
+	@Override
+	public void setBack()
+	{
+		this.setBackground(Color.black);
+	}
 	
 }

@@ -1,4 +1,4 @@
-package map;
+package contract;
 
 import java.io.IOException;
 
