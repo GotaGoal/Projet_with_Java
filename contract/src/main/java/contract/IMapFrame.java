@@ -13,5 +13,6 @@ public interface IMapFrame {
 	void setX(final int x);
 	void refresh(final Point center);
 	void setBack();
+	void repainture(final int i);
 
 }

@@ -59,8 +59,7 @@ public interface IMapWorld {
 		void addObserver(Observer e);
 		int getPointEnergyY();
 		void CallGetMonsterFour();
-		//Mobile getMonsterFour();
-		//JComponent getMonsterFour();
+		ArrayList<Mobile> removeMob(Mobile mobile);
 		
 	
 		

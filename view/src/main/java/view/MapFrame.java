@@ -144,5 +144,10 @@ public class MapFrame extends JFrame implements KeyListener,IMapFrame {
 	{
 		this.setBackground(Color.black);
 	}
+	@Override
+	public void repainture(final int i)
+	{
+		this.repaint(i);
+	}
 	
 }

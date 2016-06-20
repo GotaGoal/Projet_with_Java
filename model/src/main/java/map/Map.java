@@ -30,6 +30,9 @@ public class Map extends Entity implements Runnable{
 	private  MapPlay mapPlay;
 	private  MapFrame mapFrame;
 
+	/**
+	 * @throws IOException
+	 */
 	public Map() throws IOException {
 		this.mapWorld = new MapWorld(1);
 		

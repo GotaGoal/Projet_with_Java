@@ -23,7 +23,7 @@ public class MapWorld extends Observable implements IMapWorld{
 	
 	
 	public MotionlessElement		elements[][];
-	public final ArrayList<Mobile>	mobiles;
+	public  ArrayList<Mobile>	mobiles;
 	
 	private MonsterFour monsterFour;
 	private Lorann lorann;
@@ -358,13 +358,20 @@ public class MapWorld extends Observable implements IMapWorld{
 		this.setMonsterFour(monsterFour);
 		this.addMobile((Mobile) monsterFour, x, y);
 	}
-	
+	@Override
 	public void CallGetMonsterFour()
 	{
 		this.getMonsterFour();
 	}
+	@Override
+	public ArrayList<Mobile> removeMob(Mobile object)
+	{
+		this.mobiles.remove(object);
+		
+		return mobiles;
+	}
 	
-/*
+/*	
 	public void setElements(final Element[][] elements) {
 		this.elements = elements;
 	}*/
