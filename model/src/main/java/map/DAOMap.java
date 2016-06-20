@@ -196,5 +196,202 @@ class DAOMap extends DAOEntity<Map> {
 		return null;
 	}
 
+	public int getEnergyX(final int mapID) throws IOException {
+		final String sql = "{call get_objet(?, ?)}";
+		int valeur_x = 0;
+		try {
+			final CallableStatement call = this.getConnection().prepareCall(sql);
+			call.setInt(1, mapID);
+			call.setInt(2, 1);
+			call.execute();
+			final ResultSet resultSet = call.getResultSet();
+			if(resultSet.first()){;
+				valeur_x = resultSet.getInt(2);
+			}	
+
+		} 
+		catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return valeur_x;		
+	}
 	
+	public int getEnergyY(final int mapID) throws IOException {
+		final String sql = "{call get_objet(?, ?)}";
+		int valeur_y = 0;
+		try {
+			final CallableStatement call = this.getConnection().prepareCall(sql);
+			call.setInt(1, mapID);
+			call.setInt(2, 1);
+			call.execute();
+			final ResultSet resultSet = call.getResultSet();
+			if(resultSet.first()){;
+				valeur_y = resultSet.getInt(3);
+			}	
+
+		} 
+		catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return valeur_y;		
+	}
+	
+	public int getDoorOpenX(final int mapID) throws IOException {
+		final String sql = "{call get_objet(?, ?)}";
+		int valeur_x = 0;
+		try {
+			final CallableStatement call = this.getConnection().prepareCall(sql);
+			call.setInt(1, mapID);
+			call.setInt(2, 3);
+			call.execute();
+			final ResultSet resultSet = call.getResultSet();
+			if(resultSet.first()){;
+				valeur_x = resultSet.getInt(2);
+			}	
+
+		} 
+		catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return valeur_x;		
+	}
+	
+	public int getDoorOpenY(final int mapID) throws IOException {
+		final String sql = "{call get_objet(?, ?)}";
+		int valeur_y = 0;
+		try {
+			final CallableStatement call = this.getConnection().prepareCall(sql);
+			call.setInt(1, mapID);
+			call.setInt(2, 3);
+			call.execute();
+			final ResultSet resultSet = call.getResultSet();
+			if(resultSet.first()){;
+				valeur_y = resultSet.getInt(3);
+			}	
+
+		} 
+		catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return valeur_y;		
+	}
+	
+	public int getDoorCloseX(final int mapID) throws IOException {
+		final String sql = "{call get_objet(?, ?)}";
+		int valeur_x = 0;
+		try {
+			final CallableStatement call = this.getConnection().prepareCall(sql);
+			call.setInt(1, mapID);
+			call.setInt(2, 4);
+			call.execute();
+			final ResultSet resultSet = call.getResultSet();
+			if(resultSet.first()){;
+				valeur_x = resultSet.getInt(2);
+			}	
+
+		} 
+		catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return valeur_x;		
+	}
+	
+	public int getDoorCloseY(final int mapID) throws IOException {
+		final String sql = "{call get_objet(?, ?)}";
+		int valeur_y = 0;
+		try {
+			final CallableStatement call = this.getConnection().prepareCall(sql);
+			call.setInt(1, mapID);
+			call.setInt(2, 4);
+			call.execute();
+			final ResultSet resultSet = call.getResultSet();
+			if(resultSet.first()){;
+				valeur_y = resultSet.getInt(3);
+			}	
+
+		} 
+		catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return valeur_y;		
+	}
+	
+	public int getTreasureX(final int mapID) throws IOException {
+		final String sql = "{call get_objet(?, ?)}";
+		int valeur_x = 0;
+		try {
+			final CallableStatement call = this.getConnection().prepareCall(sql);
+			call.setInt(1, mapID);
+			call.setInt(2, 2);
+			call.execute();
+			final ResultSet resultSet = call.getResultSet();
+			if(resultSet.first()){;
+				valeur_x = resultSet.getInt(2);
+			}	
+
+		} 
+		catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return valeur_x;		
+	}
+	
+	public int getTreasureY(final int mapID) throws IOException {
+		final String sql = "{call get_objet(?, ?)}";
+		int valeur_y = 0;
+		try {
+			final CallableStatement call = this.getConnection().prepareCall(sql);
+			call.setInt(1, mapID);
+			call.setInt(2, 2);
+			call.execute();
+			final ResultSet resultSet = call.getResultSet();
+			if(resultSet.first()){;
+				valeur_y = resultSet.getInt(3);
+			}	
+
+		} 
+		catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return valeur_y;		
+	}
+	
+	public int getLorannX(final int mapID) throws IOException {
+		final String sql = "{call get_Lorann(?)}";
+		int valeur_x = 0;
+		try {
+			final CallableStatement call = this.getConnection().prepareCall(sql);
+			call.setInt(1, mapID);
+			call.execute();
+			final ResultSet resultSet = call.getResultSet();
+			if(resultSet.first()){;
+				valeur_x = resultSet.getInt(1);
+			}	
+
+		} 
+		catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return valeur_x;		
+	}
+	
+	public int getLorannY(final int mapID) throws IOException {
+		final String sql = "{call get_Lorann(?)}";
+		int valeur_y = 0;
+		try {
+			final CallableStatement call = this.getConnection().prepareCall(sql);
+			call.setInt(1, mapID);
+			call.execute();
+			final ResultSet resultSet = call.getResultSet();
+			if(resultSet.first()){;
+				valeur_y = resultSet.getInt(2);
+			}	
+
+		} 
+		catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return valeur_y;		
+	}
+
 }

@@ -56,13 +56,13 @@ public class MapWorld extends Observable {
 		switch(id)
 		{
 		case 1:
-			this.loadFile("mapWorld.txt");
+			this.loadMap(1);
 			break;
 		case 2:
-			this.loadFile("map1.txt");
+			this.loadMap(2);
 			break;
 		case 3:
-			this.loadFile("map2.txt");
+			this.loadMap(3);
 			break;
 		default:
 			break;
@@ -130,13 +130,29 @@ public class MapWorld extends Observable {
 	{
 		return this.pointLorannY;
 	}
-	/*
+	
 
-	private void loadFile(final int mapID) throws IOException {
+	private void loadMap(final int mapID) throws IOException {
 		try {
 			final DAOMap daomap = new DAOMap(DBConnection.getInstance().getConnection());
 			this.width = daomap.getTailleMapX(mapID);
 			this.height = daomap.getTailleMapY(mapID);
+			
+			this.pointLorannX = daomap.getLorannX(mapID);
+			this.pointLorannY = daomap.getLorannY(mapID);
+			
+			this.setPointEnergyX(daomap.getEnergyX(mapID));
+			this.setPointEnergyY(daomap.getEnergyY(mapID));
+			
+			this.setPointGateOpenX(daomap.getDoorOpenX(mapID));
+			this.setPointGateOpenY(daomap.getDoorOpenY(mapID));
+			
+			this.setPointGateCloseX(daomap.getDoorCloseX(mapID));
+			this.setPointGateCloseY(daomap.getDoorCloseY(mapID));
+			
+			this.setPointTreasureX(daomap.getTreasureX(mapID));
+			this.setPointTreasureY(daomap.getTreasureY(mapID));
+			
 			this.elements = new MotionlessElement[this.getWidth()][this.getHeight()];
 			for (int x = 0; x < this.width; x++) {
 				for (int y = 0 ; y < this.height; y++) {
@@ -165,7 +181,18 @@ public class MapWorld extends Observable {
 		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
+	
+	public void enregistrer(final String filename, final int mapID) throws IOException{
+		try {
+			final DAOMap daomap = new DAOMap(DBConnection.getInstance().getConnection());
+			daomap.loadBDD(filename, mapID);
+		
+		} catch (final SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private void loadFile(final String fileName) throws IOException {
 		final BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
 		String line;
