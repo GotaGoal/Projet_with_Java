@@ -24,19 +24,25 @@ public class Map extends Entity implements Runnable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private final MapWorld mapWorld;
+	private final MapWorld menu;
+	private Animation menuPlay;
 	private Lorann Lorann;
 	private  int				WINDOW_WIDTH;
 	private  int				WINDOW_HEIGHT;
 	private  MapPlay mapPlay;
 	private  MapFrame mapFrame;
+	private MapFrame menuFrame;
 
 	/**
 	 * @throws IOException
+	 * @throws InterruptedException 
 	 */
-	public Map() throws IOException {
+	public Map() throws IOException, InterruptedException {
 		this.mapWorld = new MapWorld(1);
 		
 		this.mapPlay = new MapPlay(this.mapWorld);
+		this.menu = new MapWorld("map0.txt");
+		this.menuPlay = new Animation(this.menu);
 		
 		
 		/*
@@ -60,8 +66,15 @@ public class Map extends Entity implements Runnable{
 		final BoardFrame boardFrame = new BoardFrame("Lorann Yolo",
 				WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_HEIGHT, this.getMapWorld().getElements(), this.getMapWorld().getMobiles(), this.getMapWorld().getLorann().getPosition());
 		this.mapWorld.addObserver(boardFrame.getBoardPanel());*/
-		this.mapFrame = new MapFrame("Welcome to LorannWorld",this.getMapWorld(), this.getMapPlay());
-		this.mapPlay.setMapFrame(this.mapFrame);
+		try {
+			this.menuFrame = new MapFrame("Coucou",this.menu,this.menuPlay);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.menuPlay.setMapFrame(this.menuFrame);
+		//this.mapFrame = new MapFrame("Welcome to LorannWorld",this.getMapWorld(), this.getMapPlay());
+		//this.mapPlay.setMapFrame(this.mapFrame);
 		
 	}
 	/*

@@ -18,8 +18,9 @@ public abstract class Main {
 	 * @param args
 	 *          the arguments
 	 * @throws IOException 
+	 * @throws InterruptedException 
 	 */
-	public static void main(final String[] args) throws IOException {
+	public static void main(final String[] args) throws IOException, InterruptedException {
 		//final Model model = new Model();
 		/*final View view = new View(model);
 		final Controller controller = new Controller(view, model);

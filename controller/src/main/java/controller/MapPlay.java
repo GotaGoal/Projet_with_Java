@@ -38,7 +38,7 @@ public class MapPlay implements contract.IOrderPerformed,IMapPlay{
 		
 		
 
-		public MapPlay(final MapWorld mapWorld) {
+		public MapPlay(MapWorld mapWorld) {
 			this.mapWorld = mapWorld;
 			
 			
@@ -48,11 +48,12 @@ public class MapPlay implements contract.IOrderPerformed,IMapPlay{
 			this.mapWorld.addElement(new Energy(), this.mapWorld.getPointEnergyX(), this.mapWorld.getPointEnergyY());
 			this.mapWorld.addElement(new Gate_Close(), this.mapWorld.getPointGateCloseX(), this.mapWorld.getPointGateCloseY());
 			this.mapWorld.addElement(new Treasure(), this.mapWorld.getPointTreasureX(), this.mapWorld.getPointTreasureY());
+			//this.mapWorld.addMobile(new Fireball(), 1, 1);
 			
 			this.mapWorld.addMobile(new MonsterFour(), 5, 4);
 		    this.timer = createTimer (this);
 		    this.startTimer();
-		    this.timerKill  = this.createTimerForKill(this);
+		    this.timerKill  = createTimerForKill(this);
 		    this.startTimerForKill();
 			
 		
@@ -77,7 +78,7 @@ public class MapPlay implements contract.IOrderPerformed,IMapPlay{
 					}
 		        }
 		        private void timePerform() throws IOException {
-					System.out.println("gros poupouch");
+					
 					int xLorann = mapWorld.getLorann().getX();
 				    int yLorann = mapWorld.getLorann().getY();
 				    int xMonsterFour = mapWorld.getMonsterFour().getX();
@@ -85,29 +86,23 @@ public class MapPlay implements contract.IOrderPerformed,IMapPlay{
 				   
 						if (xMonsterFour > xLorann){
 				    		mapWorld.getMonsterFour().moveLeft();
-				    		mapPlay.mapFrame.repainture(1);
 
-				    		
 				    	}
 				    	if (yMonsterFour > yLorann){
 				    		mapWorld.getMonsterFour().moveUp();
-    		
-				    		
+				   
 				    	}
 				    	if (xMonsterFour < xLorann){
 				    		mapWorld.getMonsterFour().moveRight();
-				    		
+				    	
 				    		}
 				    		
 				    	if (yMonsterFour < yLorann){
 				    		mapWorld.getMonsterFour().moveDown();
-				    		
-				    		
-				    		
+				    	
 				    	}
-					if(mapPlay.getActuelMapWorld().getMonsterFour().getX() == mapPlay.getActuelMapWorld().getLorann().getX()&&mapPlay.getActuelMapWorld().getMonsterFour().getY() == mapPlay.getActuelMapWorld().getLorann().getY() )
+					if(mapPlay.getActuelMapWorld().getMonsterFour().getX() == mapPlay.getActuelMapWorld().getLorann().getX() && mapPlay.getActuelMapWorld().getMonsterFour().getY() == mapPlay.getActuelMapWorld().getLorann().getY() )
 					{
-						//mapPlay.mapFrame.showMessage("Vous êtes mort fdp");
 						mapWorld.removeMob(mapWorld.getMonsterFour());
 						mapPlay.mapFrame.repainture(1);
 			    		mapPlay.mapFrame.setMeeting(mapPlay.getMapWorld());
@@ -123,6 +118,7 @@ public class MapPlay implements contract.IOrderPerformed,IMapPlay{
 				    			{
 			    					mapWorld.getMonsterFour().setX(x);
 						    		mapWorld.getMonsterFour().setY(y);
+						    		
 						    		bool = true;
 						    		
 				    			}
@@ -134,13 +130,13 @@ public class MapPlay implements contract.IOrderPerformed,IMapPlay{
 		      };
 		    return new Timer(500, action);
 		  }
-		@Override
+		
 		public void startTimerForKill(){
-			this.timer.start();
+			this.timerKill.start();
 		}
-		@Override
+		
 		public Timer createTimerForKill (final MapPlay mapPlay){
-		    ActionListener action = new ActionListener()
+		    ActionListener action2 = new ActionListener()
 		      {
 		        public void actionPerformed (ActionEvent event)
 		        {
@@ -152,6 +148,8 @@ public class MapPlay implements contract.IOrderPerformed,IMapPlay{
 					}
 		        }
 		        private void timePerform() throws IOException {
+		        	System.out.println("fdp");
+		        	mapPlay.getActuelMapWorld().getFireball().moveDown();
 					
 					if(mapPlay.getActuelMapWorld().getMonsterFour().getX() == mapPlay.getActuelMapWorld().getLorann().getX()&&mapPlay.getActuelMapWorld().getMonsterFour().getY() == mapPlay.getActuelMapWorld().getLorann().getY() )
 					{
@@ -160,7 +158,8 @@ public class MapPlay implements contract.IOrderPerformed,IMapPlay{
 				
 			}
 		      };
-		    return new Timer(1, action);
+		      
+		    return new Timer(500, action2);
 		  }
 		@Override
 		public IMapWorld getMapWorld()
@@ -190,6 +189,9 @@ public class MapPlay implements contract.IOrderPerformed,IMapPlay{
 						this.getActuelMapWorld().getLorann().setOrientation(Orientation.NORTH);
 						this.mapWorld.getLorann().setSprite(new Sprite("☺!","lorann_u.png"));
 						
+						
+						
+						
 						break;
 					case RIGHT:
 						this.getActuelMapWorld().getLorann().moveRight();
@@ -197,27 +199,39 @@ public class MapPlay implements contract.IOrderPerformed,IMapPlay{
 						System.out.println(String.valueOf(this.getMapWorld().getLorann().getOrientation()));
 						this.mapWorld.getLorann().setSprite(new Sprite("☺!","lorann_r.png"));
 						
+						
+						
+						
+						
 						break;
 					case DOWN:
 						this.getActuelMapWorld().getLorann().moveDown();
 						this.getActuelMapWorld().getLorann().setOrientation(Orientation.SOUTH);
 						this.mapWorld.getLorann().setSprite(new Sprite("☺!","lorann_b.png"));
 						
+						
 						break;
 					case LEFT:
 						this.getActuelMapWorld().getLorann().moveLeft();
 						this.getActuelMapWorld().getLorann().setOrientation(Orientation.WEST);
 						this.mapWorld.getLorann().setSprite(new Sprite("☺!","lorann_bl.png"));
-					
-					case SPACE:
-						this.getActuelMapWorld().addMobile(new Fireball(), this.getActuelMapWorld().getLorann().getX(), this.getActuelMapWorld());
-						System.out.println("LOL");
 						
+						
+						
+			    		
 						break;
-					case NOP:
+					
+					case E:
+						//this.mapWorld.addMobile(new Fireball(), this.getActuelMapWorld().getLorann().getX(), this.getActuelMapWorld().getLorann().getY());
+						//this.getActuelMapWorld().getFireball().moveDown();
+						//this.getActuelMapWorld().getFireball().moveUp();
+						//System.out.println("LOL");
+						//this.mapWorld.addMobile(new Fireball(), this.getActuelMapWorld().getLorann().getX(), this.getActuelMapWorld().getLorann().getY());
+						break;
+					
 						
 					default:
-						break;
+						
 				
 			}
 				this.getWorldAnswer();
@@ -249,13 +263,13 @@ public class MapPlay implements contract.IOrderPerformed,IMapPlay{
 					this.resolvePickUpTreasure();
 					break;
 				
-				case PICKUP_FIREBALL:
+				/*case PICKUP_FIREBALL:
 					this.mapFrame.showMessage("You have found the treasure");
 					this.score+=200;
 					mapFrame.setTextChange();
 					
 					this.resolvePickUpFireball();
-					break;
+					break;*/
 					
 				case EXIT:
 					this.mapFrame.showMessage("You go back now");

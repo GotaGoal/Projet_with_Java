@@ -71,6 +71,13 @@ public class MapWorld extends Observable implements IMapWorld{
 		}
 	}
 	
+	public MapWorld(final String charge) throws IOException {
+		this();
+		//this.loadFile(1);
+		this.loadFile(charge);
+		
+	}
+	
 	@Override 
   public int getWidth() {
 		return this.width;

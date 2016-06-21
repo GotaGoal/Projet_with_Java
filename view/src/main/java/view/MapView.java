@@ -19,8 +19,8 @@ public abstract class MapView {
 				return UserOrder.DOWN;
 			case KeyEvent.VK_LEFT:
 				return UserOrder.LEFT;
-			case KeyEvent.VK_G:
-				return UserOrder.SPACE;
+			case KeyEvent.VK_E:
+				return UserOrder.E;
 			default:
 				return UserOrder.NOP;
 		}
