@@ -8,7 +8,7 @@ import javax.swing.text.html.parser.Entity;
 
 import contract.*;
 import controller.MapPlay;
-
+import controller.TestThread;
 import map.MapWorld;
 import view.MapFrame;
 
@@ -35,13 +35,14 @@ public abstract class Main implements Runnable {
 	 * @throws InterruptedException 
 	 */
 	public static void main(final String[] args) throws IOException, InterruptedException {
-		new MapTest();
+		new MapInit();
+		
 	}
 	
 	
 }
 
-class MapTest implements Runnable
+class MapInit extends Thread implements Runnable
 {
 	private final MapWorld mapWorld;
 	//private final MapWorld menu;
@@ -49,13 +50,14 @@ class MapTest implements Runnable
 	
 	private  MapPlay mapPlay;
 	private  MapFrame mapFrame;
+	
 	//private MapFrame menuFrame;
 
 	/**
 	 * @throws IOException
 	 * @throws InterruptedException 
 	 */
-	public MapTest() throws IOException, InterruptedException {
+	public MapInit() throws IOException, InterruptedException {
 		this.mapWorld = new MapWorld(1);
 		
 		this.mapPlay = new MapPlay(this.mapWorld);
@@ -72,7 +74,7 @@ class MapTest implements Runnable
 		
 		
 	}
-	
+	@Override
 	public void run() {
 		
 		/* animation here
@@ -86,6 +88,8 @@ class MapTest implements Runnable
 		*/
 		this.mapFrame = new MapFrame("Welcome to LorannWorld",this.getMapWorld(), this.getMapPlay());
 		this.mapPlay.setMapFrame(this.mapFrame);
+		TestThread t = new TestThread(mapWorld,mapFrame,mapPlay);
+		
 		
 	}
 	/*

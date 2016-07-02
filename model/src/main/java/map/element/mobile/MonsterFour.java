@@ -7,6 +7,7 @@ public class MonsterFour extends Mobile implements IDoActionOnHeroes {
 	
 	
 	public MonsterFour() {
+		
 		super(new Sprite("  ","monster_4.png"));
 	}
 

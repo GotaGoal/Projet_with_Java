@@ -12,6 +12,7 @@ import contract.IMapFrame;
 import contract.IMapPlay;
 import contract.IMapWorld;
 import contract.IOrderPerformed;
+import contract.UserOrder;
 import map.MapWorld;
 import map.Orientation;
 import map.element.Permeability;
@@ -22,38 +23,44 @@ import map.element.mobile.MonsterFour;
 import map.element.motionless.Energy;
 import map.element.motionless.IDoActionOnHeroes;
 import view.MapFrame;
+import view.MapView;
 import map.element.motionless.*;
 import map.element.mobile.*;
 
 
 
-public class MapPlay implements contract.IOrderPerformed,IMapPlay{
-	 public  IMapFrame mapFrame;
+public class MapPlay extends Thread implements contract.IOrderPerformed,IMapPlay,Runnable{
+	
+	public  IMapFrame mapFrame;
 		private IMapWorld mapWorld;
 		private int calcul_level = 1;
 		private int score = 0;
 		int Random;
 		private Timer timer;
-		private Timer timer2;
+		private Timer timerKill;
 		public int sensOne = 0;
 		public int sensTwo = 0;
 		public Orientation orientation;
 		int orienFireball;
 		private Boolean boolFireball = false;
+		public Boolean key;
+		
 		
 		
 		
 
-		public MapPlay(MapWorld mapWorld) {
+		public MapPlay(MapWorld mapWorld) throws InterruptedException {
 			this.mapWorld = mapWorld;
 			
-			
+			this.key = true;
 			
 			
 			this.mapWorld.addMobile(new Lorann(Orientation.ND), this.mapWorld.getPointSpawnLorannX(), this.mapWorld.getPointSpawnLorannY());
 			this.mapWorld.addElement(new Energy(), this.mapWorld.getPointEnergyX(), this.mapWorld.getPointEnergyY());
 			this.mapWorld.addElement(new Gate_Close(), this.mapWorld.getPointGateCloseX(), this.mapWorld.getPointGateCloseY());
 			this.mapWorld.addElement(new Treasure(), this.mapWorld.getPointTreasureX(), this.mapWorld.getPointTreasureY());
+			
+			
 			/*
 			//this.mapWorld.addMobile(new Fireball(), 1, 1);
 			if(this.mapWorld.getM1X() == -1)
@@ -92,11 +99,33 @@ public class MapPlay implements contract.IOrderPerformed,IMapPlay{
 			
 		    this.timer = createTimer (this);
 		    this.startTimer();
-		    
-		   /* this.timerKill  = createTimerForKill(this);
-		    this.startTimerForKill();*/
+		    */
+		    this.timerKill  = createTimerForKill(this);
+		    this.startTimerForKill();
 			
 		
+		}
+		
+		@Override
+		public  Boolean getKey()
+		{
+			return key;
+		}
+		@Override
+		public  void setKey(final Boolean ky)
+		{
+			key = ky;
+		}
+		public void testThread() throws InterruptedException
+		{
+			while(true)
+			{
+			System.out.println("coucou");
+			sleep(500);
+			
+			
+			}
+			
 		}
 		@Override
 		public void startTimer(){
@@ -891,37 +920,35 @@ public class MapPlay implements contract.IOrderPerformed,IMapPlay{
 		      
 		    return new Timer(500, action);
 		  }
-		/*
+		@Override
 		public void startTimerForKill(){
 			this.timerKill.start();
 		}
+		@Override
 		
 		public Timer createTimerForKill (final MapPlay mapPlay){
-		    ActionListener action2 = new ActionListener()
+		    ActionListener test = new ActionListener()
 		      {
 		        public void actionPerformed (ActionEvent event)
 		        {
 		        	try {
-						this.timePerform();
+						this.performance();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 		        }
-		        private void timePerform() throws IOException {
-		        	System.out.println("fdp");
-		        	mapPlay.getActuelMapWorld().getFireball().moveDown();
-					
-					if(mapPlay.getActuelMapWorld().getMonsterFour().getX() == mapPlay.getActuelMapWorld().getLorann().getX()&&mapPlay.getActuelMapWorld().getMonsterFour().getY() == mapPlay.getActuelMapWorld().getLorann().getY() )
-					{
-						mapPlay.mapFrame.showMessage("Vous êtes mort fdp");
-					}
+		        private void performance() throws IOException {
+		        	mapPlay.mapWorld.getLorann().setSprite(new Sprite("☺!","loranngauche.png"));
+		        	mapPlay.mapWorld.setLorann(mapWorld.getLorann());
+		        	
 				
-			}
+		        }
+		        
 		      };
 		      
-		    return new Timer(500, action2);
-		  }*/
+		    return new Timer(500, test);
+		  }
 		@Override
 		public IMapWorld getMapWorld()
 		{
@@ -942,45 +969,41 @@ public class MapPlay implements contract.IOrderPerformed,IMapPlay{
 			return this.getMapWorld();
 		}
 		@Override
-		public void orderPerform(final contract.UserOrder userOrder) throws IOException {
+		public synchronized void  orderPerform(contract.UserOrder userOrder) throws IOException {
+			this.setKey(false);
 				
 				switch (userOrder) {
 					case UP:
 						this.getActuelMapWorld().getLorann().moveUp();
 						this.getActuelMapWorld().getLorann().setOrientation(Orientation.NORTH);
 						this.mapWorld.getLorann().setSprite(new Sprite("☺!","lorann_u.png"));
-						
-						
-						
-						
+						this.setKey(true);
 						break;
+						
 					case RIGHT:
 						this.getActuelMapWorld().getLorann().moveRight();
 						this.getActuelMapWorld().getLorann().setOrientation(Orientation.EAST);
 						System.out.println(String.valueOf(this.getMapWorld().getLorann().getOrientation()));
 						this.mapWorld.getLorann().setSprite(new Sprite("☺!","lorann_r.png"));
-						
-						
-						
-						
-						
+						this.setKey(true);
 						break;
+						
 					case DOWN:
 						this.getActuelMapWorld().getLorann().moveDown();
 						this.getActuelMapWorld().getLorann().setOrientation(Orientation.SOUTH);
 						this.mapWorld.getLorann().setSprite(new Sprite("☺!","lorann_b.png"));
-						
-						
+						this.setKey(true);
 						break;
+						
 					case LEFT:
 						this.getActuelMapWorld().getLorann().moveLeft();
 						this.getActuelMapWorld().getLorann().setOrientation(Orientation.WEST);
 						this.mapWorld.getLorann().setSprite(new Sprite("☺!","loranngauche.png"));
-						
-						
-						
-			    		
+						this.setKey(true);
 						break;
+						
+					
+						
 					
 					case E:
 						if (boolFireball == false){
@@ -1005,13 +1028,33 @@ public class MapPlay implements contract.IOrderPerformed,IMapPlay{
 							boolFireball = true;
 							}
 						break;
-					
+					case NOP:
+						this.mapWorld.getLorann().setSprite(new Sprite("☺!","loranngauche.png"));
+						System.out.println("on est al");
+						break;
 						
 					default:
+						this.mapWorld.getLorann().setSprite(new Sprite("☺!","loranngauche.png"));
+						break;
+						
 						
 				
 			}
 				this.getWorldAnswer();
+				
+				
+				
+				
+				
+			
+		}
+		
+		@Override
+		public  void run() {
+			this.mapWorld.getLorann().setSprite(new Sprite("☺!","loranngauche.png"));
+			
+			
+			
 		}
 		@Override
 		public void getWorldAnswer() throws IOException {
