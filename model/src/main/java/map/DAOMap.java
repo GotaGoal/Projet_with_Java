@@ -17,7 +17,7 @@ import map.element.motionless.MotionlessElements;
  *
  * @author Jean-Aymeric Diet
  */
-class DAOMap extends DAOEntity<Map> {
+class DAOMap extends DAOEntity {
 
 	/**
 	 * Instantiates a new DAO hello world.
@@ -36,43 +36,21 @@ class DAOMap extends DAOEntity<Map> {
 	 *
 	 * @see model.DAOEntity#create(model.Entity)
 	 */
-	@Override
-	public boolean create(final Map entity) {
-		// Not implemented
-		return false;
-	}
+	
 
 	/*
 	 * (non-Javadoc)
 	 *
 	 * @see model.DAOEntity#delete(model.Entity)
 	 */
-	@Override
-	public boolean delete(final Map entity) {
-		// Not implemented
-		return false;
-	}
+	
 
 	/*
 	 * (non-Javadoc)
 	 *
 	 * @see model.DAOEntity#update(model.Entity)
 	 */
-	@Override
-	public boolean update(final Map entity) {
-		// Not implemented
-		return false;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see model.DAOEntity#find(int)
-	 */
-	@Override
-	public Map find(final int id) throws IOException {
-		return null;
-	}
+	
 	
 	public void loadBDD(final String fileName, final int mapID) throws IOException{
 		final BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
@@ -190,11 +168,7 @@ class DAOMap extends DAOEntity<Map> {
 		return valeur_id;		
 	}
 
-	@Override
-	public Map find(String key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	public int getEnergyX(final int mapID) throws IOException {
 		final String sql = "{call get_objet(?, ?)}";
@@ -393,5 +367,44 @@ class DAOMap extends DAOEntity<Map> {
 		}
 		return valeur_y;		
 	}
+	
+	public int getMonstreX(final int mapID, final int monstreID) throws IOException {
+		final String sql = "{call getPositionMonstre(?, ?)}";
+		int valeur_x = 0;
+		try {
+		final CallableStatement call = this.getConnection().prepareCall(sql);
+		call.setInt(1, mapID);
+		call.setInt(2, monstreID);
+		call.execute();
+		final ResultSet resultSet = call.getResultSet();
+		if(resultSet.first()){;
+		valeur_x = resultSet.getInt(1);
+		}
+
+		} 
+		catch (final SQLException e) {
+		e.printStackTrace();
+		}
+		return valeur_x;
+		}
+		public int getMonstreY(final int mapID, final int monstreID) throws IOException {
+		final String sql = "{call getPositionMonstre(?, ?)}";
+		int valeur_y = 0;
+		try {
+		final CallableStatement call = this.getConnection().prepareCall(sql);
+		call.setInt(1, mapID);
+		call.setInt(2, monstreID);
+		call.execute();
+		final ResultSet resultSet = call.getResultSet();
+		if(resultSet.first()){;
+		valeur_y = resultSet.getInt(2);
+		}
+
+		} 
+		catch (final SQLException e) {
+		e.printStackTrace();
+		}
+		return valeur_y;
+		}
 
 }

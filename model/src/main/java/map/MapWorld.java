@@ -10,13 +10,14 @@ import java.util.Observable;
 
 import contract.IMapWorld;
 import map.element.Element;
-import map.element.interactions.Interactions;
 import map.element.mobile.Fireball;
 import map.element.mobile.Lorann;
 import map.element.mobile.Mobile;
 import map.element.mobile.MonsterFour;
+import map.element.mobile.MonsterOne;
+import map.element.mobile.MonsterThree;
+import map.element.mobile.MonsterTwo;
 import map.element.motionless.MotionlessElements;
-import view.MapPanel;
 import map.element.motionless.MotionlessElement;
 
 public class MapWorld extends Observable implements IMapWorld{
@@ -25,6 +26,10 @@ public class MapWorld extends Observable implements IMapWorld{
 	public MotionlessElement		elements[][];
 	public  ArrayList<Mobile>	mobiles;
 	
+	
+	private MonsterOne monsterOne;
+	private MonsterTwo monsterTwo;
+	private MonsterThree monsterThree;
 	private MonsterFour monsterFour;
 	private Lorann lorann;
 	private Fireball fireball;
@@ -42,6 +47,17 @@ public class MapWorld extends Observable implements IMapWorld{
 	private int pointGateOpenY;
 	private int pointTreasureX;
 	private int pointTreasureY;
+	private int idMap;
+	private int m1X;
+	private int m1Y;
+	private int m2X;
+	private int m2Y;
+	private int m3X;
+	private int m3Y;
+	private int m4X;
+	private int m4Y;
+	private DAOMap dao;
+	
 	
 	
 
@@ -55,20 +71,11 @@ public class MapWorld extends Observable implements IMapWorld{
 	public MapWorld(int id) throws IOException {
 		this();
 		//this.loadFile(1);
-		switch(id)
-		{
-		case 1:
-			this.loadMap(1);
-			break;
-		case 2:
-			this.loadMap(2);
-			break;
-		case 3:
-			this.loadMap(3);
-			break;
-		default:
-			break;
-		}
+		
+			this.setIdMap(id);
+			this.loadMap(this.idMap);
+			
+			
 	}
 	
 	public MapWorld(final String charge) throws IOException {
@@ -77,6 +84,14 @@ public class MapWorld extends Observable implements IMapWorld{
 		this.loadFile(charge);
 		
 	}
+	
+	public MapWorld(final String str,final int idMap ) throws IOException
+ 	{
+ 		this();
+ 		this.enregistrer(str,idMap);
+
+
+ 	}
 	
 	@Override 
   public int getWidth() {
@@ -124,6 +139,13 @@ public class MapWorld extends Observable implements IMapWorld{
 		this.setChanged();
 		this.notifyObservers();
 	}
+	
+	@Override
+	public void addMobile(final Fireball fireball, final int x, final int y){
+		this.setFireball(fireball);
+		this.addMobile((Mobile)fireball, x, y);
+	}
+	
 	/*
 	public void addMobile(final Interactions interaction, final int x, final int y) {
 		this.mobiles.add(interaction);
@@ -150,29 +172,53 @@ public class MapWorld extends Observable implements IMapWorld{
 	@Override
 	public void loadMap(final int mapID) throws IOException {
 		try {
-			final DAOMap daomap = new DAOMap(DBConnection.getInstance().getConnection());
-			this.width = daomap.getTailleMapX(mapID);
-			this.height = daomap.getTailleMapY(mapID);
+			this.dao = new DAOMap(DBConnection.getInstance().getConnection());
+			this.m1X = dao.getMonstreX(mapID,1);
+			System.out.print(m1X);
+			this.m1Y = dao.getMonstreY(mapID, 1);
+			System.out.println("");
+			System.out.print(m1Y);
+			this.m2X = dao.getMonstreX(mapID, 2);
+			System.out.println("");
+			System.out.print(m2X);
+			this.m2Y = dao.getMonstreY(mapID, 2);
+			System.out.println("");
+			System.out.print(m2Y);
+			this.m3X = dao.getMonstreX(mapID, 3);
+			System.out.println("");
+			System.out.print(m3X);
+			this.m3Y = dao.getMonstreY(mapID, 3);
+			System.out.println("");
+			System.out.print(m3Y);
+			this.m4X = dao.getMonstreX(mapID, 4);
+			System.out.println("");
+			System.out.print(m4X);
+			this.m4Y = dao.getMonstreY(mapID, 4);
+			System.out.println("");
+			System.out.print(m4Y);
 			
-			this.pointLorannX = daomap.getLorannX(mapID);
-			this.pointLorannY = daomap.getLorannY(mapID);
+			this.width = dao.getTailleMapX(mapID);
+			this.height = dao.getTailleMapY(mapID);
 			
-			this.setPointEnergyX(daomap.getEnergyX(mapID));
-			this.setPointEnergyY(daomap.getEnergyY(mapID));
+			this.pointLorannX = dao.getLorannX(mapID);
+			this.pointLorannY = dao.getLorannY(mapID);
 			
-			this.setPointGateOpenX(daomap.getDoorOpenX(mapID));
-			this.setPointGateOpenY(daomap.getDoorOpenY(mapID));
+			this.setPointEnergyX(dao.getEnergyX(mapID));
+			this.setPointEnergyY(dao.getEnergyY(mapID));
 			
-			this.setPointGateCloseX(daomap.getDoorCloseX(mapID));
-			this.setPointGateCloseY(daomap.getDoorCloseY(mapID));
+			this.setPointGateOpenX(dao.getDoorOpenX(mapID));
+			this.setPointGateOpenY(dao.getDoorOpenY(mapID));
 			
-			this.setPointTreasureX(daomap.getTreasureX(mapID));
-			this.setPointTreasureY(daomap.getTreasureY(mapID));
+			this.setPointGateCloseX(dao.getDoorCloseX(mapID));
+			this.setPointGateCloseY(dao.getDoorCloseY(mapID));
+			
+			this.setPointTreasureX(dao.getTreasureX(mapID));
+			this.setPointTreasureY(dao.getTreasureY(mapID));
 			
 			this.elements = new MotionlessElement[this.getWidth()][this.getHeight()];
 			for (int x = 0; x < this.width; x++) {
 				for (int y = 0 ; y < this.height; y++) {
-					switch (daomap.getElementBDD(mapID, x, y)){
+					switch (dao.getElementBDD(mapID, x, y)){
 					
 					case 1:
 						this.addElement(MotionlessElements.getFromFileSymbol('V'), x, y);
@@ -349,6 +395,7 @@ public class MapWorld extends Observable implements IMapWorld{
 	@Override
 	public void setFireball(Fireball fireball) {
 		this.fireball = fireball;
+		this.setChanged();
 	}
 	@Override
 	public MonsterFour getMonsterFour()
@@ -371,15 +418,146 @@ public class MapWorld extends Observable implements IMapWorld{
 		this.getMonsterFour();
 	}
 	@Override
+	public void addMobile(final MonsterOne monsterOne, final int x, final int y) {
+		this.setMonsterOne(monsterOne);
+		this.addMobile((Mobile) monsterOne, x, y);
+	}
+	@Override
+	public void CallGetMonsterOne()
+	{
+		this.getMonsterOne();
+	}
+	
+	@Override
+	public void addMobile(final MonsterTwo monsterTwo, final int x, final int y) {
+		this.setMonsterTwo(monsterTwo);
+		this.addMobile((Mobile) monsterTwo, x, y);
+	}
+	@Override
+	public void CallGetMonsterTwo()
+	{
+		this.getMonsterTwo();
+	}
+	@Override
+	public void addMobile(final MonsterThree monsterThree, final int x, final int y) {
+		this.setMonsterThree(monsterThree);
+		this.addMobile((Mobile) monsterThree, x, y);
+	}
+	@Override
+	public void CallGetMonsterThree()
+	{
+		this.getMonsterThree();
+	}
+	@Override
 	public ArrayList<Mobile> removeMob(Mobile object)
 	{
 		this.mobiles.remove(object);
 		
 		return mobiles;
 	}
-	
+	@Override
+	public int getIdMap() {
+		return idMap;
+	}
+	@Override
+	public void setIdMap(int idMap) {
+		this.idMap = idMap;
+	}
+	@Override
+	public MonsterOne getMonsterOne() {
+		return monsterOne;
+	}
+	@Override
+	public void setMonsterOne(MonsterOne monsterOne) {
+		this.monsterOne = monsterOne;
+	}
+	@Override
+	public MonsterTwo getMonsterTwo() {
+		return monsterTwo;
+	}
+	@Override
+	public void setMonsterTwo(MonsterTwo monsterTwo) {
+		this.monsterTwo = monsterTwo;
+	}
+	@Override 
+	public MonsterThree getMonsterThree() {
+		return monsterThree;
+	}
+	@Override
+	public void setMonsterThree(MonsterThree monsterThree) {
+		this.monsterThree = monsterThree;
+	}
+	@Override
+	public int getM1X() {
+		return m1X;
+	}
+	@Override
+	public void setM1X(int m1x) {
+		m1X = m1x;
+	}
+	@Override
+	public int getM1Y() {
+		return m1Y;
+	}
+	@Override
+	public void setM1Y(int m1y) {
+		m1Y = m1y;
+	}
+	@Override
+	public int getM2X() {
+		return m2X;
+	}
+	@Override
+	public void setM2X(int m2x) {
+		m2X = m2x;
+	}
+	@Override
+	public int getM2Y() {
+		return m2Y;
+	}
+	@Override
+	public void setM2Y(int m2y) {
+		m2Y = m2y;
+	}
+	/*
+	public void test() throws IOException
+	{
+		this.lorann.setX(dao.getMonstreX(1, 1));
+	}*/
 /*	
 	public void setElements(final Element[][] elements) {
 		this.elements = elements;
 	}*/
+	@Override
+	public int getM3X() {
+		return m3X;
+	}
+	@Override
+	public void setM3X(int m3x) {
+		m3X = m3x;
+	}
+	@Override
+	public int getM3Y() {
+		return m3Y;
+	}
+	@Override
+	public void setM3Y(int m3y) {
+		m3Y = m3y;
+	}
+	@Override
+	public int getM4X() {
+		return m4X;
+	}
+	@Override
+	public void setM4X(int m4x) {
+		this.m4X = m4x;
+	}
+	@Override
+	public int getM4Y() {
+		return m4Y;
+	}
+	@Override
+	public void setM4Y(int m4y) {
+		m4Y = m4y;
+	}
 }

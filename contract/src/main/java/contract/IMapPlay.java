@@ -13,8 +13,8 @@ public interface IMapPlay {
 	
 	void startTimer();
 	Timer createTimer (MapPlay mapPlay);
-	void startTimerForKill();
-	Timer createTimerForKill(MapPlay mapPlay);
+	//void startTimerForKill();
+	//Timer createTimerForKill(MapPlay mapPlay);
 	IMapWorld getMapWorld();
 	IMapFrame getMapFrame();
 	void setMapFrame(final IMapFrame mapFrame);

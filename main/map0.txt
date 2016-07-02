@@ -1,22 +1,12 @@
 20
 11
-2
-2
-19
-2
-3
-2
-19
-9
-3
-7
 BBBBBBBBBBBBBBBBBBBB
 B                  B
 B                  B
 B                  B
-B                  B
-B                  B
-B                  B
+B      B B         B
+B       H          B
+B      B B         B
 B                  B
 B                  B
 B                  B

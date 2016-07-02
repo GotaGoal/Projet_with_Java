@@ -45,43 +45,6 @@ abstract class DAOEntity<E extends Entity> {
 	 *          the entity
 	 * @return true, if successful
 	 */
-	public abstract boolean create(E entity);
-
-	/**
-	 * Delete.
-	 *
-	 * @param entity
-	 *          the entity
-	 * @return true, if successful
-	 */
-	public abstract boolean delete(E entity);
-
-	/**
-	 * Update.
-	 *
-	 * @param entity
-	 *          the entity
-	 * @return true, if successful
-	 */
-	public abstract boolean update(E entity);
-
-	/**
-	 * Find.
-	 *
-	 * @param id
-	 *          the id
-	 * @return the e
-	 * @throws IOException 
-	 */
-	public abstract E find(int id) throws IOException;
-
-	/**
-	 * Find.
-	 *
-	 * @param key
-	 *          the key
-	 * @return the e
-	 */
-	public abstract E find(String key);
+	
 
 }

@@ -1,16 +1,30 @@
 package main;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.swing.SwingUtilities;
+import javax.swing.text.html.parser.Entity;
 
 import contract.*;
-import map.Map;
+import controller.MapPlay;
+
+import map.MapWorld;
+import view.MapFrame;
 
 /**
  * The Class Main.
  *
  * @author Jean-Aymeric Diet
  */
-public abstract class Main {
+public abstract class Main implements Runnable {
+	private static MapWorld mapWorld;
+	//private final MapWorld menu;
+	//private Animation menuPlay;
+	
+	private  static MapPlay mapPlay;
+	private  static MapFrame mapFrame;
+	//private MapFrame menuFrame;
 
 	/**
 	 * The main method.
@@ -21,12 +35,71 @@ public abstract class Main {
 	 * @throws InterruptedException 
 	 */
 	public static void main(final String[] args) throws IOException, InterruptedException {
-		//final Model model = new Model();
-		/*final View view = new View(model);
-		final Controller controller = new Controller(view, model);
-		view.setController(controller);
-		controller.control();*/
-		new Map();
+		new MapTest();
+	}
+	
+	
+}
+
+class MapTest implements Runnable
+{
+	private final MapWorld mapWorld;
+	//private final MapWorld menu;
+	//private Animation menuPlay;
+	
+	private  MapPlay mapPlay;
+	private  MapFrame mapFrame;
+	//private MapFrame menuFrame;
+
+	/**
+	 * @throws IOException
+	 * @throws InterruptedException 
+	 */
+	public MapTest() throws IOException, InterruptedException {
+		this.mapWorld = new MapWorld(1);
+		
+		this.mapPlay = new MapPlay(this.mapWorld);
+		
+		//animation here
+		//this.menu = new MapWorld("map0.txt");
+		//this.menuPlay = new Animation(this.menu);
+	
+		
+		
+		
+		SwingUtilities.invokeLater(this);
+
+		
 		
 	}
+	
+	public void run() {
+		
+		/* animation here
+		try {
+			this.menuFrame = new MapFrame("Coucou",this.menu,this.menuPlay);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.menuPlay.setMapFrame(this.menuFrame);
+		*/
+		this.mapFrame = new MapFrame("Welcome to LorannWorld",this.getMapWorld(), this.getMapPlay());
+		this.mapPlay.setMapFrame(this.mapFrame);
+		
+	}
+	/*
+	public void play() throws IOException {
+		this.getMapPlay().play();
+	}*/
+
+	public MapWorld getMapWorld() {
+		return this.mapWorld;
+	}
+
+	public MapPlay getMapPlay() {
+		return this.mapPlay;
+	}
+	
+	
 }
