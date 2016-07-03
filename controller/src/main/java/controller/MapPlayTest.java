@@ -31,6 +31,43 @@ public class MapPlayTest {
 		
 		
 	}
+	
+	@Test
+	public void testDeplacement() throws IOException, InterruptedException
+	{
+		MapWorld mapWorld = new MapWorld(1);
+		MapPlay mapPlay = new MapPlay(mapWorld);
+		mapWorld.addMobile(new Lorann(Orientation.EAST), 1, 1);
+		mapWorld.getLorann().moveRight();
+		assertTrue(mapWorld.getLorann().getX() == 2);
+	}
+	
+	@Test
+	public void testResolveUp() throws IOException
+	{
+		MapWorld mapWorld = new MapWorld(1);
+		MapWorld mapWorld2 = new MapWorld(2);
+		assertTrue(mapWorld != mapWorld2);
+		
+	}
+	@Test
+	public void testAddLorann() throws IOException
+	{
+		MapWorld mapWorld = new MapWorld(1);
+		Lorann lorann = new Lorann(Orientation.EAST);
+		Lorann lorann2 = new Lorann(Orientation.EAST);
+		
+		
+		
+		mapWorld.addMobile(lorann, 3, 3);
+		mapWorld.addMobile(lorann2, 4, 4);
+		assertTrue(lorann.getX() != lorann2.getX()&& lorann.getY() != lorann2.getY());
+		
+		
+		
+		
+		
+	}
 	/*
 	@Test
 	public void testResolve() throws IOException
