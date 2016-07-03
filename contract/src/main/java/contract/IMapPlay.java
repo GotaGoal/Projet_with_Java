@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.swing.Timer;
 
 import controller.MapPlay;
+import view.MapFrame;
 
 
 
@@ -17,7 +18,7 @@ public interface IMapPlay {
 	Timer createTimerForKill(MapPlay mapPlay);
 	IMapWorld getMapWorld();
 	IMapFrame getMapFrame();
-	void setMapFrame(final IMapFrame mapFrame);
+	
 	IMapWorld getActuelMapWorld();
 	void orderPerform(final UserOrder userOrder) throws IOException;
 	void getWorldAnswer() throws IOException;
@@ -31,6 +32,7 @@ public interface IMapPlay {
 	void startTimerForKill();
 	Boolean getKey();
 	void setKey(Boolean ky);
+	void setMapFrame(MapFrame mapFrame);
 	
 	
 	

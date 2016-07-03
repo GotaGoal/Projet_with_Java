@@ -12,6 +12,7 @@ import contract.IMapFrame;
 import contract.IMapPlay;
 import contract.IMapWorld;
 import contract.IOrderPerformed;
+import contract.ITestThread;
 import contract.UserOrder;
 import map.MapWorld;
 import map.Orientation;
@@ -29,9 +30,9 @@ import map.element.mobile.*;
 
 
 
-public class MapPlay extends Thread implements contract.IOrderPerformed,IMapPlay,Runnable{
+public class MapPlay extends Thread implements contract.IOrderPerformed,IMapPlay,Runnable,ITestThread{
 	
-	public  IMapFrame mapFrame;
+	public  MapFrame mapFrame;
 		private IMapWorld mapWorld;
 		private int calcul_level = 1;
 		private int score = 0;
@@ -45,7 +46,7 @@ public class MapPlay extends Thread implements contract.IOrderPerformed,IMapPlay
 		private Boolean boolFireball = false;
 		public Boolean key;
 		
-		
+		public MapPlay map;
 		
 		
 
@@ -59,6 +60,7 @@ public class MapPlay extends Thread implements contract.IOrderPerformed,IMapPlay
 			this.mapWorld.addElement(new Energy(), this.mapWorld.getPointEnergyX(), this.mapWorld.getPointEnergyY());
 			this.mapWorld.addElement(new Gate_Close(), this.mapWorld.getPointGateCloseX(), this.mapWorld.getPointGateCloseY());
 			this.mapWorld.addElement(new Treasure(), this.mapWorld.getPointTreasureX(), this.mapWorld.getPointTreasureY());
+			
 			
 			
 			/*
@@ -956,11 +958,11 @@ public class MapPlay extends Thread implements contract.IOrderPerformed,IMapPlay
 			
 		}
 		@Override
-		public IMapFrame getMapFrame() {
+		public MapFrame getMapFrame() {
 			return this.mapFrame;
 		}
 		@Override
-		public void setMapFrame(final IMapFrame mapFrame) {
+		public void setMapFrame(final MapFrame mapFrame) {
 			this.mapFrame = mapFrame;
 		}
 		@Override
@@ -1028,13 +1030,10 @@ public class MapPlay extends Thread implements contract.IOrderPerformed,IMapPlay
 							boolFireball = true;
 							}
 						break;
-					case NOP:
-						this.mapWorld.getLorann().setSprite(new Sprite("☺!","loranngauche.png"));
-						System.out.println("on est al");
-						break;
+					
 						
 					default:
-						this.mapWorld.getLorann().setSprite(new Sprite("☺!","loranngauche.png"));
+						
 						break;
 						
 						
@@ -1109,6 +1108,7 @@ public class MapPlay extends Thread implements contract.IOrderPerformed,IMapPlay
 			this.calcul_level = this.calcul_level+1;
 			
 			this.setMapWorld(new MapWorld(this.calcul_level));
+			this.initThread((MapWorld) this.getActuelMapWorld(), this.mapFrame, this);
 			
 			
 			
@@ -1119,7 +1119,7 @@ public class MapPlay extends Thread implements contract.IOrderPerformed,IMapPlay
 			this.calcul_level = this.calcul_level-1;
 			
 			this.setMapWorld(new MapWorld(this.calcul_level));
-			
+			this.initThread((MapWorld) this.getActuelMapWorld(), this.mapFrame, this);
 			
 			
 			this.resolveWorldAnswer();
@@ -1215,6 +1215,12 @@ public class MapPlay extends Thread implements contract.IOrderPerformed,IMapPlay
 		{
 			System.out.println(String.valueOf(this.calcul_level));
 			return this.calcul_level;
+		}
+
+		@Override
+		public TestThread initThread(MapWorld mapWorld, MapFrame mapFrame, MapPlay mapPlay) {
+			TestThread t = new TestThread(mapWorld,mapFrame,mapPlay);
+			return t;
 		}
 
 		

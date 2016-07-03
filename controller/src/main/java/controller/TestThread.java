@@ -4,13 +4,14 @@ package controller;
 import java.io.IOException;
 
 import contract.IOrderPerformed;
+import contract.ITestThread;
 import contract.UserOrder;
 import map.MapWorld;
 import map.element.Sprite;
 import view.MapFrame;
 import view.MapView;
 
-public class TestThread extends Thread  {
+public class TestThread extends Thread implements ITestThread {
 	private MapWorld map;
 	private MapFrame frame;
 	private MapPlay play;
@@ -67,6 +68,14 @@ public class TestThread extends Thread  {
 		   
 	   }
 	  }
+	
+	@Override
+	public TestThread initThread(MapWorld mapWorld, MapFrame mapFrame, MapPlay mapPlay)
+	{
+		TestThread t = new TestThread(mapWorld,mapFrame,mapPlay);
+		return t;
+		
+	}
 
 	
 

@@ -17,7 +17,7 @@ import view.MapFrame;
  *
  * @author Jean-Aymeric Diet
  */
-public abstract class Main implements Runnable {
+public abstract class Main implements Runnable,ITestThread {
 	private static MapWorld mapWorld;
 	//private final MapWorld menu;
 	//private Animation menuPlay;
@@ -77,25 +77,14 @@ class MapInit extends Thread implements Runnable
 	@Override
 	public void run() {
 		
-		/* animation here
-		try {
-			this.menuFrame = new MapFrame("Coucou",this.menu,this.menuPlay);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		this.menuPlay.setMapFrame(this.menuFrame);
-		*/
+		
 		this.mapFrame = new MapFrame("Welcome to LorannWorld",this.getMapWorld(), this.getMapPlay());
 		this.mapPlay.setMapFrame(this.mapFrame);
-		TestThread t = new TestThread(mapWorld,mapFrame,mapPlay);
+		this.initThread(mapWorld, mapFrame, mapPlay);
 		
 		
 	}
-	/*
-	public void play() throws IOException {
-		this.getMapPlay().play();
-	}*/
+	
 
 	public MapWorld getMapWorld() {
 		return this.mapWorld;
@@ -103,6 +92,11 @@ class MapInit extends Thread implements Runnable
 
 	public MapPlay getMapPlay() {
 		return this.mapPlay;
+	}
+	
+	public TestThread initThread(MapWorld mapWorld, MapFrame mapFrame, MapPlay mapPlay) {
+		TestThread t = new TestThread(mapWorld,mapFrame,mapPlay);
+		return t;
 	}
 	
 	
