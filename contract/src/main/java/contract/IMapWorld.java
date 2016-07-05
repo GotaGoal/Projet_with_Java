@@ -7,10 +7,7 @@ import map.element.Element;
 import map.element.mobile.Fireball;
 import map.element.mobile.Lorann;
 import map.element.mobile.Mobile;
-import map.element.mobile.MonsterFour;
-import map.element.mobile.MonsterOne;
-import map.element.mobile.MonsterThree;
-import map.element.mobile.MonsterTwo;
+import map.element.mobile.Monster;
 import map.element.motionless.MotionlessElement;
 
 import java.util.Observer;
@@ -56,27 +53,27 @@ public interface IMapWorld {
 		void setPointTreasureY(int pointTreasureY);
 		Fireball getFireball();
 		void setFireball(Fireball fireball);
-		public MonsterFour getMonsterFour();
-		void setMonsterFour(final MonsterFour monsterFour);
-		void addMobile(final MonsterFour monsterFour, final int x, final int y);
+		public Monster getMonsterFour();
+		void setMonsterFour(final Monster monsterFour);
+		
 		void addObserver(Observer e);
 		int getPointEnergyY();
 		void CallGetMonsterFour();
 		ArrayList<Mobile> removeMob(Mobile mobile);
-		void addMobile(MonsterOne monsterOne, int x, int y);
+		
 		int getIdMap();
 		void setIdMap(int idMap);
-		MonsterOne getMonsterOne();
-		void setMonsterOne(MonsterOne monsterOne);
+		Monster getMonsterOne();
+		void setMonsterOne(Monster monsterOne);
 		void CallGetMonsterOne();
-		MonsterTwo getMonsterTwo();
-		void setMonsterTwo(MonsterTwo monsterTwo);
-		void addMobile(MonsterTwo monsterTwo, int x, int y);
+		Monster getMonsterTwo();
+		void setMonsterTwo(Monster monsterTwo);
+		
 		void CallGetMonsterTwo();
-		void addMobile(MonsterThree monsterThree, int x, int y);
+		void addMobile(Monster monster, int x, int y);
 		void CallGetMonsterThree();
-		MonsterThree getMonsterThree();
-		void setMonsterThree(MonsterThree monsterThree);
+		Monster getMonsterThree();
+		void setMonsterThree(Monster monsterThree);
 		void addMobile(Fireball fireball, int x, int y);
 		void setM4Y(int m4y);
 		int getM4Y();
@@ -94,6 +91,8 @@ public interface IMapWorld {
 		int getM1Y();
 		void setM1X(int m1x);
 		int getM1X();
+		
+		Monster getMonsterTest();
 		
 	
 		

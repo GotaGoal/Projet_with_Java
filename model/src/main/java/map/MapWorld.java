@@ -13,10 +13,7 @@ import map.element.Element;
 import map.element.mobile.Fireball;
 import map.element.mobile.Lorann;
 import map.element.mobile.Mobile;
-import map.element.mobile.MonsterFour;
-import map.element.mobile.MonsterOne;
-import map.element.mobile.MonsterThree;
-import map.element.mobile.MonsterTwo;
+import map.element.mobile.Monster;
 import map.element.motionless.MotionlessElements;
 import map.element.motionless.MotionlessElement;
 
@@ -27,12 +24,13 @@ public class MapWorld extends Observable implements IMapWorld{
 	public  ArrayList<Mobile>	mobiles;
 	
 	
-	private MonsterOne monsterOne;
-	private MonsterTwo monsterTwo;
-	private MonsterThree monsterThree;
-	private MonsterFour monsterFour;
+	private Monster monsterOne;
+	private Monster monsterTwo;
+	private Monster monsterThree;
+	private Monster monsterFour;
 	private Lorann lorann;
 	private Fireball fireball;
+	private Monster monster;
 	
 	private int	width;
 	private int	height;
@@ -398,51 +396,40 @@ public class MapWorld extends Observable implements IMapWorld{
 		this.setChanged();
 	}
 	@Override
-	public MonsterFour getMonsterFour()
+	public Monster getMonsterFour()
 	{
 		return this.monsterFour;
 	}
 	@Override
-	public void setMonsterFour(final MonsterFour monsterFour) {
+	public void setMonsterFour(final Monster monsterFour) {
 		this.monsterFour = monsterFour;
 		this.setChanged();
 	}
+	
 	@Override
-	public void addMobile(final MonsterFour monsterFour, final int x, final int y) {
-		this.setMonsterFour(monsterFour);
-		this.addMobile((Mobile) monsterFour, x, y);
+	public void addMobile(final Monster monster, final int x, final int y) {
+		this.setMonsterFour(monster);
+		this.addMobile((Mobile) monster, x, y);
 	}
 	@Override
 	public void CallGetMonsterFour()
 	{
 		this.getMonsterFour();
 	}
-	@Override
-	public void addMobile(final MonsterOne monsterOne, final int x, final int y) {
-		this.setMonsterOne(monsterOne);
-		this.addMobile((Mobile) monsterOne, x, y);
-	}
+	
 	@Override
 	public void CallGetMonsterOne()
 	{
 		this.getMonsterOne();
 	}
 	
-	@Override
-	public void addMobile(final MonsterTwo monsterTwo, final int x, final int y) {
-		this.setMonsterTwo(monsterTwo);
-		this.addMobile((Mobile) monsterTwo, x, y);
-	}
+	
 	@Override
 	public void CallGetMonsterTwo()
 	{
 		this.getMonsterTwo();
 	}
-	@Override
-	public void addMobile(final MonsterThree monsterThree, final int x, final int y) {
-		this.setMonsterThree(monsterThree);
-		this.addMobile((Mobile) monsterThree, x, y);
-	}
+	
 	@Override
 	public void CallGetMonsterThree()
 	{
@@ -464,27 +451,27 @@ public class MapWorld extends Observable implements IMapWorld{
 		this.idMap = idMap;
 	}
 	@Override
-	public MonsterOne getMonsterOne() {
+	public Monster getMonsterOne() {
 		return monsterOne;
 	}
 	@Override
-	public void setMonsterOne(MonsterOne monsterOne) {
+	public void setMonsterOne(Monster monsterOne) {
 		this.monsterOne = monsterOne;
 	}
 	@Override
-	public MonsterTwo getMonsterTwo() {
+	public Monster getMonsterTwo() {
 		return monsterTwo;
 	}
 	@Override
-	public void setMonsterTwo(MonsterTwo monsterTwo) {
+	public void setMonsterTwo(Monster monsterTwo) {
 		this.monsterTwo = monsterTwo;
 	}
 	@Override 
-	public MonsterThree getMonsterThree() {
+	public Monster getMonsterThree() {
 		return monsterThree;
 	}
 	@Override
-	public void setMonsterThree(MonsterThree monsterThree) {
+	public void setMonsterThree(Monster monsterThree) {
 		this.monsterThree = monsterThree;
 	}
 	@Override
@@ -560,4 +547,18 @@ public class MapWorld extends Observable implements IMapWorld{
 	public void setM4Y(int m4y) {
 		m4Y = m4y;
 	}
+	public Monster getMonster() {
+		return monster;
+	}
+	public void setMonster(Monster monster) {
+		this.monster = monster;
+	}
+	
+	
+	@Override
+	public Monster getMonsterTest()
+	{
+		return this.monster;
+	}
+	
 }

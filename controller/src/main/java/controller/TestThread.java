@@ -15,6 +15,7 @@ public class TestThread extends Thread implements ITestThread {
 	private MapWorld map;
 	private MapFrame frame;
 	private MapPlay play;
+	public static TestThread t;
 	public TestThread(MapWorld iMapWorld,MapFrame map,MapPlay play)
 	{
 		this.play = play;
@@ -72,7 +73,7 @@ public class TestThread extends Thread implements ITestThread {
 	@Override
 	public TestThread initThread(MapWorld mapWorld, MapFrame mapFrame, MapPlay mapPlay)
 	{
-		TestThread t = new TestThread(mapWorld,mapFrame,mapPlay);
+		 t = new TestThread(mapWorld,mapFrame,mapPlay);
 		return t;
 		
 	}

@@ -8,5 +8,7 @@ import view.MapFrame;
 public interface ITestThread {
 	
 	public TestThread initThread(MapWorld mapWorld, MapFrame mapFrame, MapPlay mapPlay);
+
+	
 	
 }

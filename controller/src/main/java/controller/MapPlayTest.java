@@ -56,17 +56,10 @@ public class MapPlayTest {
 		MapWorld mapWorld = new MapWorld(1);
 		Lorann lorann = new Lorann(Orientation.EAST);
 		Lorann lorann2 = new Lorann(Orientation.EAST);
-		
-		
-		
 		mapWorld.addMobile(lorann, 3, 3);
 		mapWorld.addMobile(lorann2, 4, 4);
 		assertTrue(lorann.getX() != lorann2.getX()&& lorann.getY() != lorann2.getY());
-		
-		
-		
-		
-		
+	
 	}
 	/*
 	@Test

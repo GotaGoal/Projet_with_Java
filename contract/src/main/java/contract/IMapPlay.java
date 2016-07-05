@@ -15,7 +15,7 @@ public interface IMapPlay {
 	void startTimer();
 	Timer createTimer (MapPlay mapPlay);
 	
-	Timer createTimerForKill(MapPlay mapPlay);
+	
 	IMapWorld getMapWorld();
 	IMapFrame getMapFrame();
 	
@@ -29,10 +29,11 @@ public interface IMapPlay {
 	void resolvePickUpTreasure() throws IOException;
 	void resolveWorldAnswer() throws IOException;
 	void setMapWorld(final IMapWorld map);
-	void startTimerForKill();
 	Boolean getKey();
 	void setKey(Boolean ky);
 	void setMapFrame(MapFrame mapFrame);
+	
+	void deplacementMonstre();
 	
 	
 	
